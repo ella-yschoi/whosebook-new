@@ -648,14 +648,14 @@ const EditContainer = styled.div`
   text-align: left;
   font-size: 1rem;
   line-height: 1.6rem;
-  background-color: ${({ theme }) => theme.colors.mainLightGray200};
+  background-color: ${({ theme }) => theme.colors.mainBlue100};
   padding: 1.5rem;
   border-radius: 0.5rem;
   > input {
     width: 100%;
     height: 5rem;
     margin-top: 1rem;
-    border: 1px solid ${({ theme }) => theme.colors.mainLightGray400};
+    border: 1px solid ${({ theme }) => theme.colors.mainGray300};
   }
 `;
 

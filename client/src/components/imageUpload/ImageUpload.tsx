@@ -75,7 +75,7 @@ const ImgWrap = styled.div`
   width: 8.75rem;
   height: 8.75rem;
   border-radius: 0.5rem;
-  background-color: ${({ theme }) => theme.colors.mainLightGray300};
+  background-color: ${({ theme }) => theme.colors.mainBlue100};
   display: flex;
   justify-content: center;
   align-items: center;

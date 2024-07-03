@@ -1,4 +1,4 @@
-import tw from 'twin.macro';
+import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
 import { images } from '../../utils/importImgUrl';
 
@@ -81,8 +81,8 @@ const Footer = () => {
     <Container>
       <FooterWrapper>
         <ServiceTitle>
-          <h5 className="footer-title">Whose Book</h5>
-          <p>저희 후즈북은 '좋은 책'을 읽고 싶은 사람들을 위한,</p>
+          <h5 className="footer-title">WhoseBook</h5>
+          <p>후즈북은 나만의 책을 읽고 싶은 사람들을 위한</p>
           <p>추천 기반 도서 큐레이션 서비스 입니다.</p>
         </ServiceTitle>
         <ServiceInfo>
@@ -106,56 +106,85 @@ const Footer = () => {
           </TeamMemberInfo>
         </ServiceInfo>
       </FooterWrapper>
-      <CopyLight>Copyright 2023. 책4냥꾼. All rights reserved.</CopyLight>
+      <CopyLight>
+        Copyright 2023. 책4냥꾼. All rights reserved.
+      </CopyLight>
     </Container>
   );
 };
 
-const Container = tw.div`
-  bg-blue-500
-  mt-32
-  py-5
-  px-5
+const Container = styled.div`
+  background-color: #1F558D;
+  margin-top: 8rem;
+  padding: 1.25rem;
 `;
 
-const FooterWrapper = tw.footer`
-  flex
-  justify-between
+const FooterWrapper = styled.footer`
+  display: flex;
+  justify-content: space-between;
 `;
 
-const ServiceTitle = tw.div`
-  [> h5]:pb-5
-  [> p]:text-white
-  [> p]:mt-2
-  text-sm
+const ServiceTitle = styled.div`
+  h5 {
+    padding-bottom: 1.25rem;
+  }
+  p {
+    color: white;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+  }
 `;
 
-const ServiceInfo = tw.div`
-  flex
-  flex-col
-  [> ul]:flex
+const ServiceInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  & > ul {
+    display: flex;
+  }
 `;
 
-const ProjectInfoList = tw.ul`
-  mt-4
-  mb-4
-  [> li]:mr-7
-  text-white
-  text-xs
-  font-extrabold
+const ProjectInfoList = styled.ul`
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 20px 5px;
+  li {
+    margin-right: 1.75rem;
+    color: white;
+    font-size: 0.75rem;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 `;
 
-const TeamMemberInfo = tw.ul`
-  [> li > a > img]:w-10
-  [> li]:pr-4
+const TeamMemberInfo = styled.ul`
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  li {
+    margin-right: 1rem;
+    a {
+      display: block;
+      img {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+      }
+    }
+  }
 `;
 
-const CopyLight = tw.p`
-  text-right
-  text-xs
-  text-white
-  pr-7
-  pt-2
+const CopyLight = styled.p`
+  text-align: right;
+  font-size: 0.75rem;
+  color: white;
+  padding-right: 1.75rem;
+  padding-top: 0.5rem;
 `;
 
 export default Footer;

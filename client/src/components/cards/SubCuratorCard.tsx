@@ -57,7 +57,7 @@ const CuratorContainer = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.mainPastelBlue300};
+    background-color: ${({ theme }) => theme.colors.mainBlue100};
     color: white;
 
     div#introduce {

@@ -1,9 +1,9 @@
 import { MouseEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import tw from 'twin.macro';
-import styled from 'styled-components';
 
+import styled from '@emotion/styled';
+import { colors } from '../../styles/theme';
 import { images } from '../../utils/importImgUrl';
 import { categoryAPI, memberInfoAPI } from '../../api/userApi';
 import { saveUserInfo } from '../../store/userSlice';
@@ -153,72 +153,84 @@ const GlobalNavigationBar = () => {
   );
 };
 
-const Container = tw.div`
-  w-full
-  fixed
-  top-0
-  z-10
-  px-5
-  py-3
-  bg-slate-200
+const Container = styled.div`
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  padding: 1.25rem 1rem;
+  background-color: #e5e7eb;
 `;
 
-const NavbarWrapper = tw.nav`
-  flex
-  justify-between
+const NavbarWrapper = styled.nav`
+  display: flex;
+  justify-content: space-between;
 `;
 
-const LeftMenuWrap = tw.div`
-  flex
-  items-center
-  cursor-pointer
-  ml-20
+const LeftMenuWrap = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 5rem;
 `;
 
-const RightMenuWrap = tw.div`
-  mt-2
-  mr-20
+const RightMenuWrap = styled.div`
+  margin-top: 0.5rem;
+  margin-right: 5rem;
 `;
 
-const MenuWrap = tw.ul`
-  flex
-  items-center
-  [> a > img]:mr-3
-  [> li]:(odd:ml-7 last:ml-7)
+const MenuWrap = styled.ul`
+  display: flex;
+  align-items: center;
+
+  & > a > img {
+    margin-right: 0.75rem;
+  }
+
+  & > li {
+    &:nth-of-type(odd) {
+      margin-left: 1.75rem;
+    }
+    &:last-of-type {
+      margin-left: 1.75rem;
+    }
+  }
 `;
 
 const Menu = styled.li<{ selectMenu?: boolean }>`
-  font-weight: bold;
   padding-bottom: 0.3rem;
-  color: ${({ selectMenu, theme }) =>
-    selectMenu ? theme.colors.mainLogoColor : theme.colors.mainLightBlack100};
-  border-bottom: ${({ selectMenu, theme }) =>
-    selectMenu ? `solid 3px ${theme.colors.mainLogoColor}` : `solid 3px rgba(255, 0, 0, 0)`};
+  color: ${({ selectMenu }) =>
+    selectMenu ? colors.mainKey : colors.mainBlack};
+  border-bottom: ${({ selectMenu }) =>
+    selectMenu ? `solid 3px ${colors.mainKey}` : `solid 3px rgba(255, 0, 0, 0)`};
 `;
 
-const LogoImg = tw.img`
-  w-10
+const LogoImg = styled.img`
+  width: 2.5rem;
 `;
 
-const LogoTitle = tw.h3`
-  line-clamp-2
+const LogoTitle = styled.h3`
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 
-const ProfileImg = tw.img`
-  w-12
-  h-12
-  object-cover
-  rounded-full
-  cursor-pointer
-  border-solid border-[1px] border-sky-300
+const ProfileImg = styled.img`
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 9999px;
+  cursor: pointer;
+  border: 1px solid #7f9cf5;
 `;
 
-const LoginButton = tw.button`
-  text-[1.05rem]
+const LoginButton = styled.button`
+  font-size: 1.05rem;
 `;
 
-const RegisterButton = tw.button`
-  text-[1.05rem]
+const RegisterButton = styled.button`
+  font-size: 1.05rem;
 `;
 
 export default GlobalNavigationBar;

@@ -209,7 +209,7 @@ const Textarea = styled.textarea`
   }
 `;
 const IntroduceLenCheck = styled.div`
-  color: ${({ theme }) => theme.colors.mainLightGray400};
+  color: ${({ theme }) => theme.colors.mainGray300};
   ${tw`
         text-right
         mt-[0.3rem]
@@ -223,6 +223,6 @@ const MemberOut = styled.div`
   text-decoration-line: underline;
   cursor: pointer;
   &:hover {
-    color: ${({ theme }) => theme.colors.mainLogoColor};
+    color: ${({ theme }) => theme.colors.mainKey};
   }
 `;

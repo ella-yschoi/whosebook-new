@@ -230,7 +230,7 @@ const ProfileInfoRight = styled.div`
 `;
 
 const MyButton = styled.div`
-  background-color: ${({ theme }) => theme.colors.mainBlueGreen};
+  background-color: ${({ theme }) => theme.colors.mainKey};
   min-width: 10rem;
   max-width: 15rem;
   > p {

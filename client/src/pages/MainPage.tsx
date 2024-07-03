@@ -161,7 +161,7 @@ const MainPage = () => {
                 )
               )
             ) : (
-              <Comment>데이터가 없습니다..</Comment>
+              <Comment>베스트 큐레이터를 노려보세요!</Comment>
             )}
           </ul>
         </Section>
@@ -192,7 +192,7 @@ const MainPage = () => {
                 )
               )
             ) : (
-              <Comment>데이터가 없습니다..</Comment>
+              <Comment>혹시.. 큐레이션 한번 써보실래요?</Comment>
             )}
           </ul>
         </Section>
@@ -238,7 +238,7 @@ const Comment = tw.p`
   text-center
   text-lg
   font-extrabold
-  text-red-900
+  text-blue-200
 `;
 
 export default MainPage;

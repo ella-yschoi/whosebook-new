@@ -74,7 +74,7 @@ const CardContainer = styled.div<{ type?: CurationType }>`
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.mainPastelBlue300};
+    background-color: ${({ theme }) => theme.colors.mainBlue100};
     color: white;
     > div:nth-child(3) {
       color: white;

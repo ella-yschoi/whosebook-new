@@ -91,15 +91,15 @@ const StyledButton = styled.button<ButtonProps>`
   ${({ type }) =>
     type === 'primary' &&
     css`
-      color: ${({ theme }) => theme.colors.mainLogoColor};
-      background-color: ${({ theme }) => theme.colors.mainWhiteColor};
-      border: 0.12rem solid ${({ theme }) => theme.colors.mainLogoColor};
+      color: ${({ theme }) => theme.colors.mainKey};
+      background-color: ${({ theme }) => theme.colors.mainWhite};
+      border: 0.12rem solid ${({ theme }) => theme.colors.mainKey};
       transition: transform 0.1s;
 
       &:hover {
-        color: ${({ theme }) => theme.colors.mainWhiteColor};
-        background-color: ${({ theme }) => theme.colors.mainLogoColor};
-        border: 0.12rem solid ${({ theme }) => theme.colors.mainLogoColor};
+        color: ${({ theme }) => theme.colors.mainWhite};
+        background-color: ${({ theme }) => theme.colors.mainKey};
+        border: 0.12rem solid ${({ theme }) => theme.colors.mainKey};
       }
 
       &:active {
@@ -110,30 +110,30 @@ const StyledButton = styled.button<ButtonProps>`
   ${({ type }) =>
     type === 'subscribe' &&
     css`
-      color: ${({ theme }) => theme.colors.mainLogoColor};
+      color: ${({ theme }) => theme.colors.mainKey};
       background-color: transparent;
-      border: 0.12rem solid ${({ theme }) => theme.colors.mainLogoColor};
+      border: 0.12rem solid ${({ theme }) => theme.colors.mainKey};
     `}
     ${({ isSubscribed }) =>
     isSubscribed &&
     css`
-      color: ${({ theme }) => theme.colors.mainWhiteColor};
-      background-color: ${({ theme }) => theme.colors.mainLogoColor};
-      border: 0.12rem solid ${({ theme }) => theme.colors.mainLogoColor};
+      color: ${({ theme }) => theme.colors.mainWhite};
+      background-color: ${({ theme }) => theme.colors.mainKey};
+      border: 0.12rem solid ${({ theme }) => theme.colors.mainKey};
     `}
     
   ${({ type }) =>
     type === 'cancel' &&
     css`
-      color: ${({ theme }) => theme.colors.mainLightRed100};
-      background-color: ${({ theme }) => theme.colors.mainWhiteColor};
-      border: 0.12rem solid ${({ theme }) => theme.colors.mainLightRed100};
+      color: ${({ theme }) => theme.colors.mainRed100};
+      background-color: ${({ theme }) => theme.colors.mainWhite};
+      border: 0.12rem solid ${({ theme }) => theme.colors.mainRed100};
       transition: transform 0.1s;
 
       &:hover {
-        color: ${({ theme }) => theme.colors.mainWhiteColor};
-        background-color: ${({ theme }) => theme.colors.mainLightRed100};
-        border: 0.12rem solid ${({ theme }) => theme.colors.mainLightRed100};
+        color: ${({ theme }) => theme.colors.mainWhite};
+        background-color: ${({ theme }) => theme.colors.mainRed100};
+        border: 0.12rem solid ${({ theme }) => theme.colors.mainRed100};
       }
 
       &:active {
@@ -144,9 +144,9 @@ const StyledButton = styled.button<ButtonProps>`
   ${({ type }) =>
     type === 'detail' &&
     css`
-      color: ${({ theme }) => theme.colors.mainLightBlack100};
-      background-color: ${({ theme }) => theme.colors.mainWhiteColor};
-      border: 0.12rem solid ${({ theme }) => theme.colors.mainLightBlack100};
+      color: ${({ theme }) => theme.colors.mainGray300};
+      background-color: ${({ theme }) => theme.colors.mainWhite};
+      border: 0.12rem solid ${({ theme }) => theme.colors.mainGray300};
       transition: transform 0.1s;
 
       &:active {
@@ -157,36 +157,23 @@ const StyledButton = styled.button<ButtonProps>`
   ${({ type }) =>
     type === 'publication' &&
     css`
-      color: ${({ theme }) => theme.colors.mainLogoColor};
+      color: ${({ theme }) => theme.colors.mainKey};
       background-color: transparent;
-      border: 0.12rem solid ${({ theme }) => theme.colors.mainLogoColor};
+      border: 0.12rem solid ${({ theme }) => theme.colors.mainKey};
     `}
 
   ${({ type }) =>
     type === 'basic' &&
     css`
-      color: ${({ theme }) => theme.colors.mainGrayBlue};
-      border: 0.12rem solid ${({ theme }) => theme.colors.mainGrayBlue};
-      background-color: ${({ theme }) => theme.colors.mainWhiteColor};
+      color: ${({ theme }) => theme.colors.mainGray300};
+      border: 0.12rem solid ${({ theme }) => theme.colors.mainGray300};
+      background-color: ${({ theme }) => theme.colors.mainWhite};
       transition: transform 0.2s;
 
       &:hover {
-        color: ${({ theme }) => theme.colors.mainWhiteColor};
-        background-color: ${({ theme }) => theme.colors.mainGrayBlue};
+        color: ${({ theme }) => theme.colors.mainWhite};
+        background-color: ${({ theme }) => theme.colors.mainGray300};
       }
-
-      &:active {
-        transform: scale(0.95);
-      }
-    `}
-
-  ${({ type }) =>
-    type === 'detail' &&
-    css`
-      color: ${({ theme }) => theme.colors.mainLightBlack100};
-      background-color: ${({ theme }) => theme.colors.mainWhiteColor};
-      border: 0.12rem solid ${({ theme }) => theme.colors.mainLightBlack100};
-      transition: transform 0.1s;
 
       &:active {
         transform: scale(0.95);
@@ -196,9 +183,9 @@ const StyledButton = styled.button<ButtonProps>`
   ${({ type, isSelected }) =>
     type === 'category' &&
     css`
-      color: ${({ theme }) => (isSelected ? '#fff' : theme.colors.mainLightBlack200)};
+      color: ${({ theme }) => (isSelected ? '#fff' : theme.colors.mainGray300)};
       background-color: ${({ theme }) =>
-        isSelected ? theme.colors.mainPastelBlue300 : theme.colors.mainLightGray};
+        isSelected ? theme.colors.mainBlue100 : theme.colors.mainBlue100};
       transition: transform 0.2s;
       box-shadow: 0 0.2rem 0.2rem #adacac, 0 0.2rem 0.2rem #adacac;
       border-radius: 1rem;
@@ -206,8 +193,8 @@ const StyledButton = styled.button<ButtonProps>`
       height: 2.5rem;
 
       &:hover {
-        color: ${({ theme }) => theme.colors.mainWhiteColor};
-        background-color: ${({ theme }) => theme.colors.mainPastelBlue300};
+        color: ${({ theme }) => theme.colors.mainWhite};
+        background-color: ${({ theme }) => theme.colors.mainBlue100};
       }
 
       &:active {
@@ -218,17 +205,17 @@ const StyledButton = styled.button<ButtonProps>`
   ${({ type }) =>
     type === 'disabled' &&
     css`
-      color: ${({ theme }) => theme.colors.mainLightGray400};
-      background-color: ${({ theme }) => theme.colors.mainLightGray100};
-      border: 0.12rem solid ${({ theme }) => theme.colors.mainLightGray400};
+      color: ${({ theme }) => theme.colors.mainBlue100400};
+      background-color: ${({ theme }) => theme.colors.mainBlue100100};
+      border: 0.12rem solid ${({ theme }) => theme.colors.mainBlue100400};
       cursor: not-allowed !important;
     `}
 
   ${({ type }) =>
     type === 'create' &&
     css`
-      color: ${({ theme }) => theme.colors.mainLogoColor};
-      border: 0.1rem solid ${({ theme }) => theme.colors.mainLogoColor};
+      color: ${({ theme }) => theme.colors.mainKey};
+      border: 0.1rem solid ${({ theme }) => theme.colors.mainKey};
       border-radius: 3rem;
       width: 9.75rem;
       height: 2.6rem;
@@ -238,9 +225,9 @@ const StyledButton = styled.button<ButtonProps>`
       font-size: 0.9rem;
 
       &:hover {
-        color: ${({ theme }) => theme.colors.mainWhiteColor};
-        background-color: ${({ theme }) => theme.colors.mainLogoColor};
-        border: 0.1rem solid ${({ theme }) => theme.colors.mainLogoColor};
+        color: ${({ theme }) => theme.colors.mainWhite};
+        background-color: ${({ theme }) => theme.colors.mainKey};
+        border: 0.1rem solid ${({ theme }) => theme.colors.mainKey};
       }
 
       &:active {

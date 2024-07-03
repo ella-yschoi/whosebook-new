@@ -59,19 +59,19 @@ const StyledImgLabel = styled.label<ImgLabelProps>`
   text-align: center;
   font-size: ${(props) => (props.type === 'title' ? '1.1rem' : '1rem')};
   font-weight: ${(props) => (props.type === 'file' ? 700 : 400)};
-  color: ${({ color, theme }) => (color ? color : theme.colors.mainGrayBlue)};
+  color: ${({ color, theme }) => (color ? color : theme.colors.mainGray300)};
   padding: ${(props) => (props.padding ? props.padding : '0.75rem 0.7rem')};
   width: ${(props) => (props.width ? props.width : '6.5rem')};
-  border: 0.12rem solid ${({ theme }) => theme.colors.mainGrayBlue};
+  border: 0.12rem solid ${({ theme }) => theme.colors.mainGray300};
   background-color: ${({ backgroundColor, theme }) =>
-    backgroundColor ? backgroundColor : theme.colors.mainWhiteColor};
+    backgroundColor ? backgroundColor : theme.colors.mainWhite};
   border-radius: 0.5rem;
   cursor: pointer;
   transition: transform 0.2s;
 
   &:hover {
-    color: ${({ color, theme }) => (color ? color : theme.colors.mainWhiteColor)};
-    background-color: ${({ color, theme }) => (color ? color : theme.colors.mainGrayBlue)};
+    color: ${({ color, theme }) => (color ? color : theme.colors.mainWhite)};
+    background-color: ${({ color, theme }) => (color ? color : theme.colors.mainGray300)};
   }
 
   &:active {

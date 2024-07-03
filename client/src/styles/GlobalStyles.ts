@@ -34,7 +34,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background-color: ${({ theme }) => theme.colors.mainLightGray200};
+    background-color: ${({ theme }) => theme.colors.mainWhite};
     font-family: 'Pretendard-Thin', 'Pretendard-Regular', 'Pretendard-Bold', sans-serif;
     padding-top: 6rem !important;
   }
@@ -98,7 +98,8 @@ const GlobalStyles = createGlobalStyle`
 
   .nav-title, .footer-title {
     font-family: 'HSSanTokki20-Regular';
-    font-size: 1.7rem;
+    font-size: 2rem;
+    color: ${({ theme }) => theme.colors.mainKey};
   }
 
   .dropdown {
