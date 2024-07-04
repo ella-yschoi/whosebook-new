@@ -9,16 +9,25 @@ export const colors = {
   mainBlue100: '#EEF6FD',
 };
 
+export const fonts = {
+  mainRegular: 'HSSanTokki20-Regular',
+  subThin: 'Pretendard-Thin',
+  subRegular: 'Pretendard-Regular',
+  subBold: 'Pretendard-Bold',
+};
+
 export const cursors = {
   pointer: 'cursor: pointer',
 };
 
 export interface ITheme {
   colors: typeof colors;
+  fonts: typeof fonts;
   cursors: typeof cursors;
 }
 
 export const theme: ITheme = {
   colors,
+  fonts,
   cursors,
 };

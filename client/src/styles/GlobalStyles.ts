@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
+import { colors, fonts } from '../styles/theme';
 
-const GlobalStyles = createGlobalStyle` 
+const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'Pretendard-Thin';
     src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Thin.woff') format('woff');
@@ -34,8 +35,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background-color: ${({ theme }) => theme.colors.mainWhite};
-    font-family: 'Pretendard-Thin', 'Pretendard-Regular', 'Pretendard-Bold', sans-serif;
+    background-color: ${colors.mainWhite};
+    font-family: ${fonts.mainRegular, fonts.subBold, fonts.subRegular, fonts.subThin}, sans-serif;
     padding-top: 6rem !important;
   }
 
@@ -68,12 +69,12 @@ const GlobalStyles = createGlobalStyle`
     cursor: pointer;
   }
 
-  ol, ul{
+  ol, ul {
     list-style: none;
   }
 
   .ql-editor strong {
-    font-weight: bold !important;
+    font-weight: ${fonts.subBold} !important;
   }
 
   .ql-editor em {
@@ -81,29 +82,29 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .title {
-    font-family: 'HSSanTokki20-Regular';
+    font-family: ${fonts.mainRegular};
     font-size: 2.5rem;
   }
 
   nav {
     li[data-type='/curation/best?page='], li[data-type='/curation/new?page='], .login-btn, .register-btn {
-      font-family: 'Pretendard-Bold';
-      font-size: 1.05rem;
+      font-family: ${fonts.subBold};
+      font-size: 1.1rem;
     }
 
     .register-btn {
-      padding-left: 1.2rem;
+      margin-left: 2rem;
     }
   }
 
   .nav-title, .footer-title {
-    font-family: 'HSSanTokki20-Regular';
+    font-family: ${fonts.mainRegular};
     font-size: 2rem;
-    color: ${({ theme }) => theme.colors.mainKey};
+    color: ${colors.mainKey};
   }
 
   .dropdown {
-    font-family: 'Pretendard-Bold';
+    font-family: ${fonts.subThin};
     font-size: 0.9rem;
   }
 
@@ -112,11 +113,11 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .content-container, .reply-container {
-    font-family: 'Pretendard-Thin';
+    font-family: ${fonts.subThin};
   }
 
   .created-date {
-    font-family: 'Pretendard-Thin';
+    font-family: ${fonts.subThin};
     font-size: 0.9rem;
   }
 `;

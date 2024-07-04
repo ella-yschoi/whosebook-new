@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
-import { colors } from '../../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 import { images } from '../../utils/importImgUrl';
+import DropdownMenu from './DropdownMenu';
+
 import { categoryAPI, memberInfoAPI } from '../../api/userApi';
 import { saveUserInfo } from '../../store/userSlice';
 import { RootState } from '../../store/store';
 import { saveCategories } from '../../store/categorySlice';
-import DropdownMenu from './DropdownMenu';
+
 import WhoseBookLogo from '../../img/whoseBookLogo.png';
 
 enum SelectMenu {
@@ -26,7 +28,7 @@ const GlobalNavigationBar = () => {
   const token = localStorage.getItem('Authorization');
   const { image } = useSelector((state: RootState) => state.user);
   const [selectMenu, setSelectMenu] = useState<SelectMenu>(SelectMenu.Home);
-  const [isDropMenuOpen, setDropMenuOpen] = useState<boolean>(false);
+  const [isDropMenuOpen, setIsDropMenuOpen] = useState<boolean>(false);
 
   const handleSelectMenu = (e: MouseEvent<HTMLElement>) => {
     if (e.currentTarget.dataset) {
@@ -37,7 +39,7 @@ const GlobalNavigationBar = () => {
   };
 
   const handleIsDropMenuOpen = () => {
-    setDropMenuOpen(!isDropMenuOpen);
+    setIsDropMenuOpen(!isDropMenuOpen);
   };
 
   const handleLoginButtonClick = (e: MouseEvent<HTMLElement>) => {
@@ -50,21 +52,31 @@ const GlobalNavigationBar = () => {
       <>
         {!token && (
           <>
-            <LoginButton className="login-btn" onClick={handleLoginButtonClick}>
+            <LoginButton
+              className="login-btn"
+              onClick={handleLoginButtonClick}
+            >
               로그인
             </LoginButton>
-            <RegisterButton className="register-btn" onClick={() => navigate('/register')}>
+            <RegisterButton
+              className="register-btn"
+              onClick={() => navigate('/register')}
+            >
               회원가입
             </RegisterButton>
           </>
         )}
         {token && image && (
-          <ProfileImg src={image} alt="user select image" onClick={handleIsDropMenuOpen} />
+          <ProfileImg
+            src={image}
+            alt="user select image"
+            onClick={handleIsDropMenuOpen}
+          />
         )}
         {token && !image && (
           <ProfileImg
             src={images.defaultProfile}
-            alt="Default profile image not selected by the user"
+            alt="기본 이미지"
             onClick={handleIsDropMenuOpen}
           />
         )}
@@ -94,7 +106,7 @@ const GlobalNavigationBar = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, [token]);
+  }, [dispatch, navigate, token]);
 
   useEffect(() => {
     switch (location.pathname) {
@@ -116,7 +128,7 @@ const GlobalNavigationBar = () => {
         <LeftMenuWrap>
           <MenuWrap>
             <Link to="/">
-              <LogoImg src={WhoseBookLogo} alt="whoseBook logo image" />
+              <LogoImg src={WhoseBookLogo} alt="후즈북 로고 이미지" />
             </Link>
             <Menu data-type={SelectMenu.Home} onClick={handleSelectMenu}>
               <Link to="/">
@@ -158,24 +170,26 @@ const Container = styled.div`
   position: fixed;
   top: 0;
   z-index: 10;
-  padding: 1.25rem 1rem;
-  background-color: #e5e7eb;
+  padding: 1.5rem 1rem;
+  background-color: ${colors.mainWhite};
 `;
 
 const NavbarWrapper = styled.nav`
   display: flex;
   justify-content: space-between;
+  max-width: 75rem;
+  margin: 0 auto;
 `;
 
 const LeftMenuWrap = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin-left: 5rem;
+  margin-left: 6.5rem;
 `;
 
 const RightMenuWrap = styled.div`
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   margin-right: 5rem;
 `;
 
@@ -184,31 +198,31 @@ const MenuWrap = styled.ul`
   align-items: center;
 
   & > a > img {
-    margin-right: 0.75rem;
+    margin-right: 0rem;
   }
 
   & > li {
     &:nth-of-type(odd) {
-      margin-left: 1.75rem;
+      margin-left: 0rem;
     }
     &:last-of-type {
-      margin-left: 1.75rem;
+      margin-left: 2rem;
     }
   }
 `;
 
 const Menu = styled.li<{ selectMenu?: boolean }>`
-  padding-bottom: 0.3rem;
   color: ${({ selectMenu }) =>
     selectMenu ? colors.mainKey : colors.mainBlack};
   border-bottom: ${({ selectMenu }) =>
-    selectMenu ? `solid 3px ${colors.mainKey}` : `solid 3px transparent`};
-  font-family: 'Pretendard-Bold';
+    selectMenu ? `solid 2px ${colors.mainKey}` : `solid 2px transparent`};
+  font-family: ${fonts.subBold};
+  font-size: 1.1rem;
 `;
 
 const LogoImg = styled.img`
   width: 2.5rem;
-  border-radius: 5px;
+  border-radius: 0.3rem;
 `;
 
 const LogoTitle = styled.h3`
@@ -216,7 +230,7 @@ const LogoTitle = styled.h3`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-left: 2px;
+  margin: 0rem 6rem 0.2rem 1rem;
 `;
 
 const ProfileImg = styled.img`
@@ -225,15 +239,13 @@ const ProfileImg = styled.img`
   object-fit: cover;
   border-radius: 9999px;
   cursor: pointer;
-  border: 1px solid #7f9cf5;
+  border: 1px solid ${colors.mainBlue100};
 `;
 
 const LoginButton = styled.button`
-  font-size: 1.05rem;
 `;
 
 const RegisterButton = styled.button`
-  font-size: 1.05rem;
 `;
 
 export default GlobalNavigationBar;

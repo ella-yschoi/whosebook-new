@@ -64,7 +64,7 @@ const SignIn = () => {
   return (
     <Container>
       <HeaderWrap>
-        <img src={images.whoseBookLogo} alt="whoseBook logo" />
+        <img src={images.whoseBookLogo} alt="후즈북 로고 이미지" />
         <header className="title">후즈북</header>
       </HeaderWrap>
       <Form onSubmit={handleLogin}>

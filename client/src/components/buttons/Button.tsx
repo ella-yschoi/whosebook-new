@@ -205,9 +205,9 @@ const StyledButton = styled.button<ButtonProps>`
   ${({ type }) =>
     type === 'disabled' &&
     css`
-      color: ${({ theme }) => theme.colors.mainBlue100400};
-      background-color: ${({ theme }) => theme.colors.mainBlue100100};
-      border: 0.12rem solid ${({ theme }) => theme.colors.mainBlue100400};
+      color: ${({ theme }) => theme.colors.mainBlue100};
+      background-color: ${({ theme }) => theme.colors.mainBlue100};
+      border: 0.12rem solid ${({ theme }) => theme.colors.mainBlue100};
       cursor: not-allowed !important;
     `}
 
