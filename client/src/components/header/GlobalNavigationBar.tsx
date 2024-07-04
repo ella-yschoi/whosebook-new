@@ -2,7 +2,7 @@ import { MouseEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import { colors } from '../../styles/theme';
 import { images } from '../../utils/importImgUrl';
 import { categoryAPI, memberInfoAPI } from '../../api/userApi';
@@ -10,7 +10,7 @@ import { saveUserInfo } from '../../store/userSlice';
 import { RootState } from '../../store/store';
 import { saveCategories } from '../../store/categorySlice';
 import DropdownMenu from './DropdownMenu';
-import WhoseBookLogo from '../../img/whosebook_logo.png';
+import WhoseBookLogo from '../../img/whoseBookLogo.png';
 
 enum SelectMenu {
   Home = '/',
@@ -63,7 +63,7 @@ const GlobalNavigationBar = () => {
         )}
         {token && !image && (
           <ProfileImg
-            src={images.profileImg2}
+            src={images.defaultProfile}
             alt="Default profile image not selected by the user"
             onClick={handleIsDropMenuOpen}
           />
@@ -116,7 +116,7 @@ const GlobalNavigationBar = () => {
         <LeftMenuWrap>
           <MenuWrap>
             <Link to="/">
-              <LogoImg src={WhoseBookLogo} alt="whose book logo image" />
+              <LogoImg src={WhoseBookLogo} alt="whoseBook logo image" />
             </Link>
             <Menu data-type={SelectMenu.Home} onClick={handleSelectMenu}>
               <Link to="/">
@@ -128,14 +128,14 @@ const GlobalNavigationBar = () => {
               onClick={handleSelectMenu}
               selectMenu={selectMenu === SelectMenu.Best}
             >
-              <Link to="/curation/best?page=1&size=9">Best 큐레이션</Link>
+              <Link to="/curation/best?page=1&size=9">BEST</Link>
             </Menu>
             <Menu
               data-type={SelectMenu.New}
               onClick={handleSelectMenu}
               selectMenu={selectMenu === SelectMenu.New}
             >
-              <Link to="/curation/new?page=1&size=9">New 큐레이션</Link>
+              <Link to="/curation/new?page=1&size=9">NEW</Link>
             </Menu>
           </MenuWrap>
         </LeftMenuWrap>
@@ -202,11 +202,13 @@ const Menu = styled.li<{ selectMenu?: boolean }>`
   color: ${({ selectMenu }) =>
     selectMenu ? colors.mainKey : colors.mainBlack};
   border-bottom: ${({ selectMenu }) =>
-    selectMenu ? `solid 3px ${colors.mainKey}` : `solid 3px rgba(255, 0, 0, 0)`};
+    selectMenu ? `solid 3px ${colors.mainKey}` : `solid 3px transparent`};
+  font-family: 'Pretendard-Bold';
 `;
 
 const LogoImg = styled.img`
   width: 2.5rem;
+  border-radius: 5px;
 `;
 
 const LogoTitle = styled.h3`
@@ -214,6 +216,7 @@ const LogoTitle = styled.h3`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  margin-left: 2px;
 `;
 
 const ProfileImg = styled.img`

@@ -57,7 +57,7 @@ const CurationCard = ({
           </ItemLeft>
           <ItemRight>
             <ImageDiv>
-              <ProfileImg src={image || images.profileImg2} alt="curationCardProfileImage" />
+              <ProfileImg src={image || images.defaultProfile} alt="curationCardProfileImage" />
             </ImageDiv>
             <NicknameDiv onClick={handleUserPage}>{memberNickname}</NicknameDiv>
           </ItemRight>

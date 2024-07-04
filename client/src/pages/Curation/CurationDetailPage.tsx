@@ -11,7 +11,7 @@ import Modal from '../../components/modals/Modal';
 import Input from '../../components/input/Input';
 import Label from '../../components/label/Label';
 import Button from '../../components/buttons/Button';
-import ProfileImg from '../../img/profile_img2.png';
+import ProfileImg from '../../img/defaultProfile.png';
 import BookInfo from '../../components/curations/BookInfo';
 import ClockLoading from '../../components/Loading/ClockLoading';
 import CurationProfileInfo from '../../components/curations/CurationProfileInfo';

@@ -15,13 +15,10 @@ import fe3 from '../../src/assets/yschoi.png';
 import be1 from '../../src/assets/wook0112.png';
 import be2 from '../../src/assets/kyungju.png';
 import be3 from '../../src/assets/juyoung.png';
-import whoseBookLogo from '../../src/assets/whosebook_logo.png';
-import profileImg1 from '../../src/assets/profile_img1.png';
-import profileImg2 from '../../src/assets/profile_img2.png';
-import bookImg from '../../src/assets/book_example.jpeg';
+import whoseBookLogo from '../../src/assets/whoseBookLogo.png';
+import defaultProfile from '../../src/assets/defaultProfile.png';
 import frontError from '../../src/assets/404.png';
 import serverError from '../../src/assets/500.png';
-import bookExample from '../../src/assets/book_example.jpeg';
 
 /**
  * img 경로 관리를 하나의 파일에서만 하도록 설정
@@ -45,10 +42,7 @@ export const images = {
   be2,
   be3,
   whoseBookLogo,
-  profileImg1,
-  profileImg2,
-  bookImg,
+  defaultProfile,
   frontError,
   serverError,
-  bookExample,
 };

@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import Button from '../buttons/Button';
 import Modal from '../modals/Modal';
-import ProfileImg from '../../img/profile_img2.png';
+import ProfileImg from '../../img/defaultProfile.png';
 
 import { customAlert } from '../alert/sweetAlert';
 import { ModalType, UserPageType } from '../../types';

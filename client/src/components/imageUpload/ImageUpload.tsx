@@ -4,7 +4,7 @@ import tw from 'twin.macro';
 
 import { changeImageFileName, createImageDataUrl } from '../../utils/image';
 import { ImgLabel } from '../label/Label';
-import ProfileImg from '../../img/profile_img2.png';
+import ProfileImg from '../../img/defaultProfile.png';
 import Button from '../buttons/Button';
 
 /**

@@ -1,7 +1,7 @@
 import tw from 'twin.macro';
 import styled from 'styled-components';
 
-import ProfileImg from '../../img/profile_img2.png';
+import ProfileImg from '../../img/defaultProfile.png';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { HiPencil } from 'react-icons/hi';
