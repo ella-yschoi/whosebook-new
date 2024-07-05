@@ -88,12 +88,12 @@ const GlobalStyles = createGlobalStyle`
 
   nav {
     li[data-type='/curation/best?page='], li[data-type='/curation/new?page='], .login-btn, .register-btn {
-      font-family: ${fonts.subBold};
       font-size: 1.1rem;
+      font-family: ${fonts.subThin};
     }
 
     .register-btn {
-      margin-left: 2rem;
+      margin-left: 1.5rem;
     }
   }
 
