@@ -31,11 +31,8 @@ const GlobalNavigationBar = () => {
   const [isDropMenuOpen, setIsDropMenuOpen] = useState<boolean>(false);
 
   const handleSelectMenu = (e: MouseEvent<HTMLElement>) => {
-    if (e.currentTarget.dataset) {
-      setSelectMenu(e.currentTarget.dataset.type as SelectMenu);
-    } else {
-      setSelectMenu(SelectMenu.Home);
-    }
+    const selectedMenu = e.currentTarget.dataset.type as SelectMenu;
+    setSelectMenu(selectedMenu || SelectMenu.Home);
   };
 
   const handleIsDropMenuOpen = () => {
@@ -52,33 +49,31 @@ const GlobalNavigationBar = () => {
       <>
         {!token && (
           <>
-            <LoginButton
-              className="login-btn"
-              onClick={handleLoginButtonClick}
-            >
+            <LoginButton className='login-btn' onClick={handleLoginButtonClick}>
               로그인
             </LoginButton>
             <RegisterButton
-              className="register-btn"
+              className='register-btn'
               onClick={() => navigate('/register')}
             >
               회원가입
             </RegisterButton>
           </>
         )}
-        {token && image && (
-          <ProfileImg
-            src={image}
-            alt="user select image"
-            onClick={handleIsDropMenuOpen}
-          />
-        )}
-        {token && !image && (
-          <ProfileImg
-            src={images.defaultProfile}
-            alt="기본 이미지"
-            onClick={handleIsDropMenuOpen}
-          />
+        {token && (
+          <ProfileContainer>
+            <ProfileImg
+              src={image || images.defaultProfile}
+              alt='유저 이미지'
+              onClick={handleIsDropMenuOpen}
+            />
+            {isDropMenuOpen && (
+              <DropdownMenu
+                handleIsDropMenuOpen={handleIsDropMenuOpen}
+                handleSelectMenu={handleSelectMenu}
+              />
+            )}
+          </ProfileContainer>
         )}
       </>
     );
@@ -127,12 +122,12 @@ const GlobalNavigationBar = () => {
       <NavbarWrapper>
         <LeftMenuWrap>
           <MenuWrap>
-            <Link to="/">
-              <LogoImg src={WhoseBookLogo} alt="후즈북 로고 이미지" />
+            <Link to='/'>
+              <LogoImg src={WhoseBookLogo} alt='후즈북 로고 이미지' />
             </Link>
             <Menu data-type={SelectMenu.Home} onClick={handleSelectMenu}>
-              <Link to="/">
-                <LogoTitle className="nav-title">후즈북</LogoTitle>
+              <Link to='/'>
+                <LogoTitle className='nav-title'>후즈북</LogoTitle>
               </Link>
             </Menu>
             <Menu
@@ -140,26 +135,18 @@ const GlobalNavigationBar = () => {
               onClick={handleSelectMenu}
               selectMenu={selectMenu === SelectMenu.Best}
             >
-              <Link to="/curation/best?page=1&size=9">BEST</Link>
+              <Link to='/curation/best?page=1&size=9'>BEST</Link>
             </Menu>
             <Menu
               data-type={SelectMenu.New}
               onClick={handleSelectMenu}
               selectMenu={selectMenu === SelectMenu.New}
             >
-              <Link to="/curation/new?page=1&size=9">NEW</Link>
+              <Link to='/curation/new?page=1&size=9'>NEW</Link>
             </Menu>
           </MenuWrap>
         </LeftMenuWrap>
-        <RightMenuWrap>
-          {renderLoginMenu()}
-          {isDropMenuOpen && (
-            <DropdownMenu
-              handleIsDropMenuOpen={handleIsDropMenuOpen}
-              handleSelectMenu={handleSelectMenu}
-            />
-          )}
-        </RightMenuWrap>
+        <RightMenuWrap>{renderLoginMenu()}</RightMenuWrap>
       </NavbarWrapper>
     </Container>
   );
@@ -170,14 +157,18 @@ const Container = styled.div`
   position: fixed;
   top: 0;
   z-index: 10;
-  padding: 1.5rem 1rem;
+  padding-top: 1.5rem;
   background-color: ${colors.mainWhite};
+`;
+
+const ProfileContainer = styled.div`
+  position: relative;
 `;
 
 const NavbarWrapper = styled.nav`
   display: flex;
   justify-content: space-between;
-  max-width: 75rem;
+  max-width: 60rem;
   margin: 0 auto;
 `;
 
@@ -185,12 +176,12 @@ const LeftMenuWrap = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin-left: 6.5rem;
 `;
 
 const RightMenuWrap = styled.div`
+  display: flex;
+  align-items: center;
   margin-top: 0.75rem;
-  margin-right: 5rem;
 `;
 
 const MenuWrap = styled.ul`
@@ -216,8 +207,8 @@ const Menu = styled.li<{ selectMenu?: boolean }>`
     selectMenu ? colors.mainKey : colors.mainBlack};
   border-bottom: ${({ selectMenu }) =>
     selectMenu ? `solid 2px ${colors.mainKey}` : `solid 2px transparent`};
-  font-family: ${fonts.subBold};
   font-size: 1.1rem;
+  font-family: ${fonts.subBold};
 `;
 
 const LogoImg = styled.img`
