@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { v4 as uuid4 } from 'uuid';
-import { styled } from 'styled-components';
-import tw from 'twin.macro';
+import styled from 'styled-components';
 
 import {
   bestCuratorsAPI,
@@ -21,37 +20,14 @@ import Label from '../components/label/Label';
 import ClockLoading from '../components/Loading/ClockLoading';
 import PencilButton from '../components/buttons/PencilButton';
 import Footer from '../components/Footer/Footer';
+import { colors } from '../styles/theme';
 
 const bannerData = [
   {
     id: 1,
-    imgUrl: images.banner1,
-    curationId: '19',
-  },
-  {
-    id: 2,
-    imgUrl: images.banner2,
-    curationId: '22',
-  },
-  {
-    id: 3,
-    imgUrl: images.banner3,
-    curationId: '46',
-  },
-  {
-    id: 4,
-    imgUrl: images.banner4,
-    curationId: '44',
-  },
-  {
-    id: 5,
-    imgUrl: images.banner5,
-    curationId: '41',
-  },
-  {
-    id: 6,
-    imgUrl: images.banner6,
-    curationId: '40',
+    imgUrl: images.banner,
+    // curationId: '1',
+    // TODO: 소개 페이지 제작 후 연결 예정
   },
 ];
 
@@ -114,12 +90,11 @@ const MainPage = () => {
           <SimpleSlider data={bannerData} />
         </Banner>
         <Section>
-          <Label type="title" content="Best 큐레이터" />
+          <Label type='title' content='BEST 큐레이터' />
           <br />
-          <Label content="구독자가 많은 후즈북 큐레이터를 소개합니다." />
           <ul>
             {isLoading && !bestCurators?.length ? (
-              <ClockLoading color="#3173f6" style={{ ...loadingStyle }} />
+              <ClockLoading color='#3173f6' style={{ ...loadingStyle }} />
             ) : (
               bestCurators?.map(({ image, memberId, mySubscriber, nickname }) => (
                 <div key={uuid4()}>
@@ -136,14 +111,14 @@ const MainPage = () => {
         </Section>
         <Section>
           <div>
-            <Label type="title" content="Best 큐레이션" />
-            <Link to="/curation/best?page=1&size=9">
-              <Label content="> 더 보기" />
+            <Label type='title' content='BEST 큐레이션' />
+            <Link to='/curation/best?page=1&size=9'>
+              <Label content='> 더 보기' />
             </Link>
           </div>
           <ul>
             {isLoading && !bestCurations?.length ? (
-              <ClockLoading color="#3173f6" style={{ ...loadingStyle }} />
+              <ClockLoading color='#3173f6' style={{ ...loadingStyle }} />
             ) : bestCurations?.length ? (
               bestCurations?.map(
                 ({ curator, curationId, emoji, title, content, memberId, curationLikeCount }) => (
@@ -161,20 +136,20 @@ const MainPage = () => {
                 )
               )
             ) : (
-              <Comment>베스트 큐레이터를 노려보세요!</Comment>
+              <Comment>베스트 큐레이터 도전?</Comment>
             )}
           </ul>
         </Section>
         <Section>
           <div>
-            <Label type="title" content="New 큐레이션" />
-            <Link to="/curation/new?page=1&size=9">
-              <Label content="> 더 보기" />
+            <Label type='title' content='NEW 큐레이션' />
+            <Link to='/curation/new?page=1&size=9'>
+              <Label content='> 더 보기' />
             </Link>
           </div>
           <ul>
             {isLoading && !newCurations?.length ? (
-              <ClockLoading color="#3173f6" style={{ ...loadingStyle }} />
+              <ClockLoading color='#3173f6' style={{ ...loadingStyle }} />
             ) : newCurations?.length ? (
               newCurations?.map(
                 ({ curator, curationId, emoji, title, content, memberId, curationLikeCount }) => (
@@ -192,7 +167,7 @@ const MainPage = () => {
                 )
               )
             ) : (
-              <Comment>혹시.. 큐레이션 한번 써보실래요?</Comment>
+              <Comment>큐레이션 써보실래요?</Comment>
             )}
           </ul>
         </Section>
@@ -213,32 +188,44 @@ const Container = styled.div`
   }
 `;
 
-const Banner = tw.div`
-  mt-10
-  mb-20
-  h-52
+const Banner = styled.div`
+  margin-top: 1rem;
+  margin-bottom: 7rem;
+  height: 13rem;
 `;
 
-const Section = tw.div`
-  h-64
-  mb-10
-  [> div]:flex
-  [> div]:justify-between
-  [> div > a > label]:last:text-black
-  [> div > a > label]:last:cursor-pointer
-  [> br]:mt-2
-  [> ul]:mt-3
-  [> ul]:flex
-  [> ul]:justify-between
+const Section = styled.div`
+  height: 16rem;
+  margin-bottom: 2.5rem;
+
+  & > div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & > div > a > label:last-child {
+    color: ${colors.mainBlack};
+    cursor: pointer;
+  }
+
+  & > br {
+    margin-top: 0.5rem;
+  }
+
+  & > ul {
+    margin-top: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
-const Comment = tw.p`
-  w-full
-  mt-20
-  text-center
-  text-lg
-  font-extrabold
-  text-blue-200
+const Comment = styled.p`
+  width: 100%;
+  margin-top: 5rem;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: #bfdbfe;
 `;
 
 export default MainPage;
