@@ -168,7 +168,7 @@ const ProfileContainer = styled.div`
 const NavbarWrapper = styled.nav`
   display: flex;
   justify-content: space-between;
-  max-width: 60rem;
+  max-width: 59.3rem;
   margin: 0 auto;
 `;
 
