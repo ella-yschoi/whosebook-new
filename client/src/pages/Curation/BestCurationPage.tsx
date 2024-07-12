@@ -1,8 +1,8 @@
 import ReactPaginate from 'react-paginate';
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { styled } from 'styled-components';
-import tw from 'twin.macro';
+import styled from 'styled-components';
+import { colors, fonts } from '../../styles/theme';
 
 import CategoryTag from '../../components/category/CategoryTag';
 import { LikedCurationAPI, LikedCurationCategoryAPI } from '../../api/curationApi';
@@ -13,6 +13,7 @@ import Button from '../../components/buttons/Button';
 import Footer from '../../components/Footer/Footer';
 import ClockLoading from '../../components/Loading/ClockLoading';
 import { customAlert } from '../../components/alert/sweetAlert';
+
 const loadingStyle = {
   width: '80vw',
   height: '15vh',
@@ -23,15 +24,15 @@ const loadingStyle = {
 
 const BestCurationPage = () => {
   const navigate = useNavigate();
-  const [searchParmas, setSearchParams] = useSearchParams();
-  const categoryParam = searchParmas.get('category');
-  const pageParm = searchParmas.get('page');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryParam = searchParams.get('category');
+  const pageParam = searchParams.get('page');
 
   const [bestCurations, setBestCurations] = useState<ICurationResponseData[] | null>(null);
-  const [currentPage, setCurrentPage] = useState<number>((Number(pageParm) - 1) | 0);
+  const [currentPage, setCurrentPage] = useState<number>((Number(pageParam) - 1) || 0);
   const [totalBestPage, setTotalBestPage] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [selectCategory, setSelectCategory] = useState<number>(Number(categoryParam) | 0);
+  const [selectCategory, setSelectCategory] = useState<number>(Number(categoryParam) || 0);
 
   const [isAllBtnActive, setIsAllBtnActive] = useState(true);
   const itemsPerPage = 9;
@@ -112,21 +113,21 @@ const BestCurationPage = () => {
       setSelectCategory(0);
     }
     handleGetBestCurations();
-  }, [currentPage, searchParmas]);
+  }, [currentPage, searchParams]);
 
   useEffect(() => {
-    setCurrentPage(Number(pageParm) - 1);
-  }, [pageParm]);
+    setCurrentPage(Number(pageParam) - 1);
+  }, [pageParam]);
 
   useEffect(() => {
     handleGetBestCurations();
   }, []);
+
   return (
     <>
       <Container>
         <TitleContainer>
           <TitleDiv>
-            <Label type="title" content="큐레이션 카테고리" />
             <AllBtn onClick={handleAllCategory} isActive={isAllBtnActive}>
               전체 카테고리 보기
             </AllBtn>
@@ -147,7 +148,6 @@ const BestCurationPage = () => {
         <Section>
           <Label type="title" content="Best 큐레이션" />
           <br />
-          <Label content="가장 인기있는 후즈북 큐레이션을 소개합니다." />
           <ul>
             {isLoading && (!bestCurations || bestCurations.length === 0) ? (
               <ClockLoading color="#3173f6" style={{ ...loadingStyle }} />
@@ -208,51 +208,66 @@ const TitleContainer = styled.div`
   margin: 0rem -1.2rem -3rem 3rem;
 `;
 
-export const TitleDiv = styled.div`
+const TitleDiv = styled.div`
   display: flex;
   gap: 2rem;
   align-items: center;
 `;
-export const AllBtn = styled.div<{ isActive: boolean }>`
+
+const AllBtn = styled.div<{ isActive: boolean }>`
   font-size: 1rem;
-  padding: 0.3rem;
+  padding: 0.2rem;
   cursor: pointer;
-  color: ${({ isActive }) => (isActive ? '#3173f6' : 'inherit')};
-  font-weight: ${({ isActive }) => (isActive ? '800' : 'inherit')};
-  border-bottom: ${({ isActive }) => (isActive ? '3px solid #3173f6' : 'none')};
+  color: ${({ isActive }) => (isActive ? colors.mainKey : 'inherit')};
+  font-family: ${({ isActive }) => (isActive ? fonts.subBold : 'inherit')};
+  border-bottom: ${({ isActive }) => (isActive ? `3px solid ${colors.mainKey}` : 'none')};
 `;
+
 const CreateButton = styled.div`
   width: 9.5rem;
   margin: 2rem 5rem;
   cursor: pointer;
 `;
 
-const Section = tw.div`
-  h-64
-  mt-5
-  mb-10
-  [> div]:flex
-  [> div]:justify-between
-  [> div > a > label]:last:text-black
-  [> div > a > label]:last:cursor-pointer
-  [> br]:mt-2
-  [> ul]:mt-5
-  [> ul]:flex
-  [> ul]:gap-x-7 gap-y-7
-  [> ul]:flex-wrap
+const Section = styled.div`
+  height: 16rem;
+  margin-top: 1.25rem;
+  margin-bottom: 2.5rem;
+
+  & > div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & > div > a > label:last-child {
+    color: black;
+    cursor: pointer;
+  }
+
+  & > br {
+    margin-top: 0.5rem;
+  }
+
+  & > ul {
+    margin-top: 1.25rem;
+    display: flex;
+    gap: 1.75rem;
+    flex-wrap: wrap;
+  }
 `;
 
-const Comment = tw.p`
-  w-full
-  mt-20
-  text-center
-  text-lg
-  font-extrabold
-  text-red-900
+const Comment = styled.p`
+  width: 100%;
+  margin-top: 5rem;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: #b91c1c;
 `;
 
 const PaginationContainer = styled.div`
   margin-top: 30rem;
+
   ul {
     display: flex;
     list-style: none;
@@ -260,29 +275,33 @@ const PaginationContainer = styled.div`
     margin: 0;
     justify-content: center;
     text-align: center;
+
     li {
       margin: 0 0.3rem;
       width: 2rem;
       height: 2rem;
       padding: 0.3rem;
-      border-radius: 100%;
+      border-radius: 50%;
       cursor: pointer;
+
       a {
         display: inline-block;
         text-decoration: none;
         border-radius: 3px;
         text-align: center;
       }
+
       &.active {
         background-color: #3173f6;
         color: #fff;
-        border-radius: 100%;
-        a {
+
+        & > a {
           color: #fff;
         }
       }
+
       &:hover {
-        a {
+        & > a {
           color: #3173f6;
         }
       }

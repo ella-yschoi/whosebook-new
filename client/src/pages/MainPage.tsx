@@ -91,7 +91,7 @@ const MainPage = () => {
         </Banner>
         <Section>
           <Label type='title' content='BEST 큐레이터' />
-          <br />
+          <br/>
           <ul>
             {isLoading && !bestCurators?.length ? (
               <ClockLoading color='#3173f6' style={{ ...loadingStyle }} />
@@ -110,12 +110,12 @@ const MainPage = () => {
           </ul>
         </Section>
         <Section>
-          <div>
+          <SectionHeader>
             <Label type='title' content='BEST 큐레이션' />
             <Link to='/curation/best?page=1&size=9'>
               <Label content='> 더 보기' />
             </Link>
-          </div>
+          </SectionHeader>
           <ul>
             {isLoading && !bestCurations?.length ? (
               <ClockLoading color='#3173f6' style={{ ...loadingStyle }} />
@@ -141,12 +141,12 @@ const MainPage = () => {
           </ul>
         </Section>
         <Section>
-          <div>
+          <SectionHeader>
             <Label type='title' content='NEW 큐레이션' />
             <Link to='/curation/new?page=1&size=9'>
               <Label content='> 더 보기' />
             </Link>
-          </div>
+          </SectionHeader>
           <ul>
             {isLoading && !newCurations?.length ? (
               <ClockLoading color='#3173f6' style={{ ...loadingStyle }} />
@@ -189,33 +189,28 @@ const Container = styled.div`
 `;
 
 const Banner = styled.div`
-  margin-top: 1rem;
-  margin-bottom: 7rem;
+  margin-bottom: 9rem;
   height: 13rem;
 `;
 
 const Section = styled.div`
-  height: 16rem;
   margin-bottom: 2.5rem;
 
-  & > div {
+  & > ul {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1rem;
   }
+`;
 
-  & > div > a > label:last-child {
+const SectionHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  & > a > label:last-child {
     color: ${colors.mainBlack};
     cursor: pointer;
-  }
-
-  & > br {
-    margin-top: 0.5rem;
-  }
-
-  & > ul {
-    margin-top: 0.75rem;
-    display: flex;
-    justify-content: space-between;
   }
 `;
 

@@ -2,6 +2,7 @@ import ReactPaginate from 'react-paginate';
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { styled } from 'styled-components';
+import { colors, fonts } from '../../styles/theme';
 import tw from 'twin.macro';
 
 import CategoryTag from '../../components/category/CategoryTag';
@@ -13,7 +14,7 @@ import Button from '../../components/buttons/Button';
 import Footer from '../../components/Footer/Footer';
 import ClockLoading from '../../components/Loading/ClockLoading';
 import { customAlert } from '../../components/alert/sweetAlert';
-import { TitleDiv, AllBtn } from './BestCurationPage';
+
 const loadingStyle = {
   width: '80vw',
   height: '15vh',
@@ -126,7 +127,6 @@ const NewCurationPage = () => {
       <Container>
         <TitleContainer>
           <TitleDiv>
-            <Label type="title" content="큐레이션 카테고리" />
             <AllBtn onClick={handleAllCategory} isActive={isAllBtnActive}>
               전체 카테고리 보기
             </AllBtn>
@@ -147,7 +147,6 @@ const NewCurationPage = () => {
         <Section>
           <Label type="title" content="New 큐레이션" />
           <br />
-          <Label content="가장 트렌디한 후즈북 큐레이션을 소개합니다." />
           <ul>
             {isLoading && (!newCurations || newCurations.length === 0) ? (
               <ClockLoading color="#3173f6" style={{ ...loadingStyle }} />
@@ -206,6 +205,21 @@ const TitleContainer = styled.div`
   align-items: center;
   margin-bottom: -1rem;
   margin: 0rem -1.2rem -3rem 3rem;
+`;
+
+const TitleDiv = styled.div`
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+`;
+
+const AllBtn = styled.div<{ isActive: boolean }>`
+  font-size: 1rem;
+  padding: 0.2rem;
+  cursor: pointer;
+  color: ${({ isActive }) => (isActive ? colors.mainKey : 'inherit')};
+  font-family: ${({ isActive }) => (isActive ? fonts.subBold : 'inherit')};
+  border-bottom: ${({ isActive }) => (isActive ? `3px solid ${colors.mainKey}` : 'none')};
 `;
 
 const CreateButton = styled.div`
