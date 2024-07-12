@@ -144,9 +144,9 @@ const StyledButton = styled.button<ButtonProps>`
   ${({ type }) =>
     type === 'detail' &&
     css`
-      color: ${({ theme }) => theme.colors.mainGray300};
+      color: ${({ theme }) => theme.colors.mainGray400};
       background-color: ${({ theme }) => theme.colors.mainWhite};
-      border: 0.12rem solid ${({ theme }) => theme.colors.mainGray300};
+      border: 0.12rem solid ${({ theme }) => theme.colors.mainGray400};
       transition: transform 0.1s;
 
       &:active {
@@ -165,14 +165,14 @@ const StyledButton = styled.button<ButtonProps>`
   ${({ type }) =>
     type === 'basic' &&
     css`
-      color: ${({ theme }) => theme.colors.mainGray300};
-      border: 0.12rem solid ${({ theme }) => theme.colors.mainGray300};
+      color: ${({ theme }) => theme.colors.mainGray400};
+      border: 0.12rem solid ${({ theme }) => theme.colors.mainGray400};
       background-color: ${({ theme }) => theme.colors.mainWhite};
       transition: transform 0.2s;
 
       &:hover {
         color: ${({ theme }) => theme.colors.mainWhite};
-        background-color: ${({ theme }) => theme.colors.mainGray300};
+        background-color: ${({ theme }) => theme.colors.mainGray400};
       }
 
       &:active {
@@ -183,18 +183,19 @@ const StyledButton = styled.button<ButtonProps>`
   ${({ type, isSelected }) =>
     type === 'category' &&
     css`
-      color: ${({ theme }) => (isSelected ? '#fff' : theme.colors.mainGray300)};
+      color: ${({ theme }) => (isSelected ? theme.colors.mainWhite : theme.colors.mainGray400)};
       background-color: ${({ theme }) =>
-        isSelected ? theme.colors.mainBlue100 : theme.colors.mainBlue100};
+        isSelected ? theme.colors.mainKey : theme.colors.mainGray200};
       transition: transform 0.2s;
-      box-shadow: 0 0.2rem 0.2rem #adacac, 0 0.2rem 0.2rem #adacac;
+      box-shadow: 0 0.2rem 0.2rem #dadada, 0 0.2rem 0.2rem #dadada;
       border-radius: 1rem;
       width: 7.5rem;
       height: 2.5rem;
+      font-family: ${({ theme }) => theme.fonts.subRegular};
 
       &:hover {
         color: ${({ theme }) => theme.colors.mainWhite};
-        background-color: ${({ theme }) => theme.colors.mainBlue100};
+        background-color: ${({ theme }) => theme.colors.mainKey};
       }
 
       &:active {
@@ -221,7 +222,7 @@ const StyledButton = styled.button<ButtonProps>`
       height: 2.6rem;
       padding: 0.5rem;
       transition: transform 0.1s;
-      font-weight: 100;
+      font-family: ${({ theme }) => theme.fonts.subBold};
       font-size: 0.9rem;
 
       &:hover {

@@ -157,8 +157,9 @@ const Container = styled.div`
   position: fixed;
   top: 0;
   z-index: 10;
-  padding-top: 1.5rem;
+  padding: 1rem;
   background-color: ${colors.mainWhite};
+  border-bottom: solid 1px ${colors.mainGray100};
 `;
 
 const ProfileContainer = styled.div`

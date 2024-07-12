@@ -4,7 +4,8 @@ export const colors = {
   mainBlack: '#000000',
   mainGray100: '#F8F9FA',
   mainGray200: '#F0F0F0',
-  mainGray300: '#8A92A6',
+  mainGray300: '#DADADA',
+  mainGray400: '#8A92A6',
   mainRed100: '#E14444',
   mainBlue100: '#EEF6FD',
 };

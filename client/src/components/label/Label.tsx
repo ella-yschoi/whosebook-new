@@ -10,6 +10,7 @@ interface LabelProps {
   htmlFor?: string;
   content?: string;
 }
+
 interface ImgLabelProps extends LabelProps {
   width?: string;
   padding?: string;
@@ -49,20 +50,29 @@ export const ImgLabel = ({
 };
 
 const StyledLabel = styled.label<LabelProps>`
-  font-size: ${(props) => (props.type === 'title' ? '1rem' : '0.8rem')};
-  font-weight: ${(props) => (props.type === 'title' ? 'bold' : 400)};
-  color: ${(props) => (props.type === 'title' ? '#000' : '#474b50')};
+  font-size: ${(props) => (props.type === 'title' ? '1.2rem' : '0.8rem')};
+  font-family: ${(props) =>
+    props.type === 'title'
+      ? props.theme.fonts.subBold
+      : props.theme.fonts.subThin};
+  color: ${(props) =>
+    props.type === 'title'
+      ? props.theme.colors.mainBlack
+      : props.theme.colors.mainGray400};
 `;
 
 const StyledImgLabel = styled.label<ImgLabelProps>`
   display: block;
   text-align: center;
   font-size: ${(props) => (props.type === 'title' ? '1.1rem' : '1rem')};
-  font-weight: ${(props) => (props.type === 'file' ? 700 : 400)};
-  color: ${({ color, theme }) => (color ? color : theme.colors.mainGray300)};
+  font-family: ${(props) =>
+    props.type === 'title'
+      ? props.theme.fonts.subBold
+      : props.theme.fonts.subThin};
+  color: ${({ color, theme }) => (color ? color : theme.colors.mainGray400)};
   padding: ${(props) => (props.padding ? props.padding : '0.75rem 0.7rem')};
   width: ${(props) => (props.width ? props.width : '6.5rem')};
-  border: 0.12rem solid ${({ theme }) => theme.colors.mainGray300};
+  border: 0.12rem solid ${({ theme }) => theme.colors.mainGray400};
   background-color: ${({ backgroundColor, theme }) =>
     backgroundColor ? backgroundColor : theme.colors.mainWhite};
   border-radius: 0.5rem;
@@ -71,7 +81,8 @@ const StyledImgLabel = styled.label<ImgLabelProps>`
 
   &:hover {
     color: ${({ color, theme }) => (color ? color : theme.colors.mainWhite)};
-    background-color: ${({ color, theme }) => (color ? color : theme.colors.mainGray300)};
+    background-color: ${({ color, theme }) =>
+      color ? color : theme.colors.mainGray400};
   }
 
   &:active {

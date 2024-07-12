@@ -83,7 +83,8 @@ const StyledInput = styled.input<InputProps>`
   width: ${({ width }) => (width ? width : '100%')};
   border: ${({ border }) => (border ? border : 'none')};
   border-radius: 0.3rem;
-  color: ${({ color, theme }) => (color ? color : `${theme.colors.mainGray300}`)};
+  color: ${({ color, theme }) =>
+    color ? color : `${theme.colors.mainGray400}`};
   padding: ${({ padding }) => (padding ? padding : '0.7rem')};
   background-color: ${({ backgroundColor, theme }) =>
     backgroundColor ? backgroundColor : `${theme.colors.mainBlue100}`};

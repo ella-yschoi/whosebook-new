@@ -55,7 +55,8 @@ const MenuWrapper = styled.div`
   padding: 1.9rem 2rem 1rem 2rem;
   background-color: ${colors.mainBlue100};
   border-radius: 0.5rem;
-  box-shadow: 0 25px 50px -12px ${colors.mainGray300}, 0 10px 15px -3px ${colors.mainGray300};
+  box-shadow: 0 25px 50px -12px ${colors.mainGray400},
+    0 10px 15px -3px ${colors.mainGray400};
 `;
 
 const MenuList = styled.ul`
