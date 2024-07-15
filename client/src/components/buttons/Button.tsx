@@ -84,9 +84,8 @@ const StyledButton = styled.button<ButtonProps>`
   padding: ${({ padding }) => (padding ? padding : '0.7rem')};
   color: ${({ color }) => (color ? color : '#fff')};
   background-color: ${({ backgroundColor }) => backgroundColor && backgroundColor};
-  font-weight: 700;
+  font-family: ${({ theme }) => theme.fonts.subRegular};
   font-size: 1rem;
-  font-family: 'SpoqaHanSansNeo-Regular';
 
   ${({ type }) =>
     type === 'primary' &&
@@ -215,10 +214,10 @@ const StyledButton = styled.button<ButtonProps>`
   ${({ type }) =>
     type === 'create' &&
     css`
-      color: ${({ theme }) => theme.colors.mainKey};
+      background-color: ${({ theme }) => theme.colors.mainKey};
       border: 0.1rem solid ${({ theme }) => theme.colors.mainKey};
       border-radius: 3rem;
-      width: 9.75rem;
+      width: 9rem;
       height: 2.6rem;
       padding: 0.5rem;
       transition: transform 0.1s;

@@ -1,9 +1,8 @@
 import ReactPaginate from 'react-paginate';
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import { colors, fonts } from '../../styles/theme';
-import tw from 'twin.macro';
 
 import CategoryTag from '../../components/category/CategoryTag';
 import { newlyCurationAPI, newlyCurationCategoryAPI } from '../../api/curationApi';
@@ -25,17 +24,17 @@ const loadingStyle = {
 
 const NewCurationPage = () => {
   const navigate = useNavigate();
-  const [searchParmas, setSearchParams] = useSearchParams();
-  const categoryParam = searchParmas.get('category');
-  const pageParm = searchParmas.get('page');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryParam = searchParams.get('category');
+  const pageParam = searchParams.get('page');
 
   const [newCurations, setNewCurations] = useState<ICurationResponseData[] | null>(null);
-  const [currentPage, setCurrentPage] = useState<number>((Number(pageParm) - 1) | 0);
+  const [currentPage, setCurrentPage] = useState<number>((Number(pageParam) - 1) || 0);
   const [totalNewPage, setTotalNewPage] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [selectCategory, setSelectCategory] = useState<number>(Number(categoryParam) | 0);
+  const [selectCategory, setSelectCategory] = useState<number>(Number(categoryParam) || 0);
 
-  const [isAllBtnActive, setIsAllBtnActive] = useState(true);
+  const [isAllCategoryBtnActive, setIsAllCategoryBtnActive] = useState(true);
   const itemsPerPage = 9;
 
   const handleGetBestCurations = async () => {
@@ -58,7 +57,7 @@ const NewCurationPage = () => {
   const handleAllCategory = () => {
     setCurrentPage(0);
     setSelectCategory(0);
-    setIsAllBtnActive(true);
+    setIsAllCategoryBtnActive(true);
 
     navigate(`/curation/new?page=${currentPage + 1}&size=${itemsPerPage}`);
   };
@@ -82,7 +81,7 @@ const NewCurationPage = () => {
 
   const handleSetSelectCategory = (selectedValue: number) => {
     setCurrentPage(0);
-    setIsAllBtnActive(false);
+    setIsAllCategoryBtnActive(false);
     setSelectCategory(selectedValue);
 
     navigate(`/curation/new?category=${selectedValue}&page=1&size=9`);
@@ -95,12 +94,12 @@ const NewCurationPage = () => {
       navigate('/write');
     } else {
       customAlert({
-        title: '로그인이 필요한 서비스입니다.',
-        text: '후즈북 회원만 큐레이션 작성이 가능합니다.',
+        title: '로그인이 필요해요',
+        text: '후즈북 큐레이터가 되면 큐레이션을 쓸 수 있어요',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#777676',
+        confirmButtonColor: `${colors.mainKey}`,
+        cancelButtonColor: `${colors.mainGray300}`,
         confirmButtonText: 'Login',
         handleLoginPage: () => navigate('/login'),
       });
@@ -109,33 +108,32 @@ const NewCurationPage = () => {
 
   useEffect(() => {
     if (categoryParam) {
-      setIsAllBtnActive(false);
+      setIsAllCategoryBtnActive(false);
       setSelectCategory(Number(categoryParam));
     } else {
-      setIsAllBtnActive(true);
+      setIsAllCategoryBtnActive(true);
       setSelectCategory(0);
     }
     handleGetBestCurations();
-  }, [currentPage, searchParmas]);
+  }, [currentPage, searchParams]);
 
   useEffect(() => {
-    setCurrentPage(Number(pageParm) - 1);
-  }, [pageParm]);
+    setCurrentPage(Number(pageParam) - 1);
+  }, [pageParam]);
 
   return (
     <>
       <Container>
         <TitleContainer>
           <TitleDiv>
-            <AllBtn onClick={handleAllCategory} isActive={isAllBtnActive}>
+            <AllCategoryBtn onClick={handleAllCategory} isActive={isAllCategoryBtnActive}>
               전체 카테고리 보기
-            </AllBtn>
+            </AllCategoryBtn>
           </TitleDiv>
-
           <CreateButton>
             <Button
-              type="create"
-              content="﹢ 큐레이션 작성하기"
+              type='create'
+              content='﹢ 큐레이션 쓰기'
               onClick={handleCreateButtonClick}
             />
           </CreateButton>
@@ -145,11 +143,11 @@ const NewCurationPage = () => {
           selectCategory={selectCategory}
         />
         <Section>
-          <Label type="title" content="New 큐레이션" />
+          <Label type='title' content='NEW 큐레이션' />
           <br />
           <ul>
             {isLoading && (!newCurations || newCurations.length === 0) ? (
-              <ClockLoading color="#3173f6" style={{ ...loadingStyle }} />
+              <ClockLoading color='${colors.mainKey}' style={{ ...loadingStyle }} />
             ) : (
               newCurations?.map((e) => (
                 <CurationCard
@@ -165,7 +163,7 @@ const NewCurationPage = () => {
               ))
             )}
             {!isLoading && newCurations && newCurations.length === 0 && (
-              <Comment>앗, 지금은 새로운 큐레이션이 없어요🫥</Comment>
+              <Comment>이 카테고리에는 새로운 큐레이션이 없어요 😖</Comment>
             )}
           </ul>
         </Section>
@@ -177,8 +175,8 @@ const NewCurationPage = () => {
               forcePage={currentPage}
               containerClassName={'pagination'}
               activeClassName={'active'}
-              nextLabel=">"
-              previousLabel="<"
+              nextLabel='>'
+              previousLabel='<'
             />
           </PaginationContainer>
         )}
@@ -213,46 +211,60 @@ const TitleDiv = styled.div`
   align-items: center;
 `;
 
-const AllBtn = styled.div<{ isActive: boolean }>`
+const AllCategoryBtn = styled.div<{ isActive: boolean }>`
+  margin-bottom: -2rem;
   font-size: 1rem;
-  padding: 0.2rem;
   cursor: pointer;
-  color: ${({ isActive }) => (isActive ? colors.mainKey : 'inherit')};
-  font-family: ${({ isActive }) => (isActive ? fonts.subBold : 'inherit')};
+  color: ${colors.mainKey};
+  font-family: ${fonts.subBold};
+  padding-bottom: ${({ isActive }) => (isActive ? '0' : '3px')};
   border-bottom: ${({ isActive }) => (isActive ? `3px solid ${colors.mainKey}` : 'none')};
 `;
 
 const CreateButton = styled.div`
-  width: 9.5rem;
+  width: 9rem;
   margin: 2rem 5rem;
 `;
 
-const Section = tw.div`
-  h-64
-  mt-5
-  mb-10
-  [> div]:flex
-  [> div]:justify-between
-  [> div > a > label]:last:text-black
-  [> div > a > label]:last:cursor-pointer
-  [> br]:mt-2
-  [> ul]:mt-5
-  [> ul]:flex
-  [> ul]:gap-x-7 gap-y-7
-  [> ul]:flex-wrap
+const Section = styled.div`
+  height: 16rem;
+  margin-top: 1.5rem;
+  margin-bottom: 7rem;
+
+  & > div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & > div > a > label:last-child {
+    color: ${colors.mainBlack};
+    cursor: pointer;
+  }
+
+  & > br {
+    margin-top: 0.5rem;
+  }
+
+  & > ul {
+    margin-top: 1.25rem;
+    display: flex;
+    gap: 1.75rem;
+    flex-wrap: wrap;
+  }
 `;
 
-const Comment = tw.p`
-  w-full
-  mt-20
-  text-center
-  text-lg
-  font-extrabold
-  text-red-900
+const Comment = styled.p`
+  width: 100%;
+  margin-top: 5rem;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: ${colors.mainKey};
 `;
 
 const PaginationContainer = styled.div`
   margin-top: 30rem;
+
   ul {
     display: flex;
     list-style: none;
@@ -260,30 +272,34 @@ const PaginationContainer = styled.div`
     margin: 0;
     justify-content: center;
     text-align: center;
+
     li {
       margin: 0 0.3rem;
       width: 2rem;
       height: 2rem;
       padding: 0.3rem;
-      border-radius: 100%;
+      border-radius: 50%;
       cursor: pointer;
+
       a {
         display: inline-block;
         text-decoration: none;
         border-radius: 3px;
         text-align: center;
       }
+
       &.active {
-        background-color: #3173f6;
-        color: #fff;
-        border-radius: 100%;
-        a {
-          color: #fff;
+        background-color: ${colors.mainKey};
+        color: ${colors.mainWhite};
+
+        & > a {
+          color: ${colors.mainWhite};
         }
       }
+
       &:hover {
-        a {
-          color: #3173f6;
+        & > a {
+          color: ${colors.mainKey};
         }
       }
     }

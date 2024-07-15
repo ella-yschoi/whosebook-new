@@ -34,7 +34,7 @@ const BestCurationPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [selectCategory, setSelectCategory] = useState<number>(Number(categoryParam) || 0);
 
-  const [isAllBtnActive, setIsAllBtnActive] = useState(true);
+  const [isAllCategoryBtnActive, setIsAllCategoryBtnActive] = useState(true);
   const itemsPerPage = 9;
 
   const handleGetBestCurations = async () => {
@@ -56,7 +56,7 @@ const BestCurationPage = () => {
   const handleAllCategory = () => {
     setCurrentPage(0);
     setSelectCategory(0);
-    setIsAllBtnActive(true);
+    setIsAllCategoryBtnActive(true);
     navigate(`/curation/best?page=${currentPage + 1}&size=${itemsPerPage}`);
   };
 
@@ -79,7 +79,7 @@ const BestCurationPage = () => {
 
   const handleSetSelectCategory = (selectedValue: number) => {
     setCurrentPage(0);
-    setIsAllBtnActive(false);
+    setIsAllCategoryBtnActive(false);
     setSelectCategory(selectedValue);
 
     navigate(`/curation/best?category=${selectedValue}&page=1&size=9`);
@@ -92,12 +92,12 @@ const BestCurationPage = () => {
       navigate('/write');
     } else {
       customAlert({
-        title: '로그인이 필요한 서비스입니다.',
-        text: '후즈북 회원만 큐레이션 작성이 가능합니다.',
+        title: '로그인이 필요해요',
+        text: '후즈북 큐레이터가 되면 큐레이션을 쓸 수 있어요',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#777676',
+        confirmButtonColor: `${colors.mainKey}`,
+        cancelButtonColor: `${colors.mainGray300}`,
         confirmButtonText: 'Login',
         handleLoginPage: () => navigate('/login'),
       });
@@ -106,10 +106,10 @@ const BestCurationPage = () => {
 
   useEffect(() => {
     if (categoryParam) {
-      setIsAllBtnActive(false);
+      setIsAllCategoryBtnActive(false);
       setSelectCategory(Number(categoryParam));
     } else {
-      setIsAllBtnActive(true);
+      setIsAllCategoryBtnActive(true);
       setSelectCategory(0);
     }
     handleGetBestCurations();
@@ -128,15 +128,14 @@ const BestCurationPage = () => {
       <Container>
         <TitleContainer>
           <TitleDiv>
-            <AllBtn onClick={handleAllCategory} isActive={isAllBtnActive}>
+            <AllCategoryBtn onClick={handleAllCategory} isActive={isAllCategoryBtnActive}>
               전체 카테고리 보기
-            </AllBtn>
+            </AllCategoryBtn>
           </TitleDiv>
-
           <CreateButton>
             <Button
-              type="create"
-              content="﹢ 큐레이션 작성하기"
+              type='create'
+              content='﹢ 큐레이션 쓰기'
               onClick={handleCreateButtonClick}
             />
           </CreateButton>
@@ -146,11 +145,11 @@ const BestCurationPage = () => {
           selectCategory={selectCategory}
         />
         <Section>
-          <Label type="title" content="Best 큐레이션" />
+          <Label type='title' content='BEST 큐레이션' />
           <br />
           <ul>
             {isLoading && (!bestCurations || bestCurations.length === 0) ? (
-              <ClockLoading color="#3173f6" style={{ ...loadingStyle }} />
+              <ClockLoading color='${colors.mainKey}' style={{ ...loadingStyle }} />
             ) : (
               bestCurations?.map((e) => (
                 <CurationCard
@@ -166,7 +165,7 @@ const BestCurationPage = () => {
               ))
             )}
             {!isLoading && bestCurations && bestCurations.length === 0 && (
-              <Comment>앗, 지금은 베스트 큐레이션이 없어요🫥</Comment>
+              <Comment>이 카테고리에는 베스트 큐레이션이 없어요 😖</Comment>
             )}
           </ul>
         </Section>
@@ -178,8 +177,8 @@ const BestCurationPage = () => {
               forcePage={currentPage}
               containerClassName={'pagination'}
               activeClassName={'active'}
-              nextLabel=">"
-              previousLabel="<"
+              nextLabel='>'
+              previousLabel='<'
             />
           </PaginationContainer>
         )}
@@ -214,25 +213,25 @@ const TitleDiv = styled.div`
   align-items: center;
 `;
 
-const AllBtn = styled.div<{ isActive: boolean }>`
+const AllCategoryBtn = styled.div<{ isActive: boolean }>`
+  margin-bottom: -2rem;
   font-size: 1rem;
-  padding: 0.2rem;
   cursor: pointer;
-  color: ${({ isActive }) => (isActive ? colors.mainKey : 'inherit')};
-  font-family: ${({ isActive }) => (isActive ? fonts.subBold : 'inherit')};
+  color: ${colors.mainKey};
+  font-family: ${fonts.subBold};
+  padding-bottom: ${({ isActive }) => (isActive ? '0' : '3px')};
   border-bottom: ${({ isActive }) => (isActive ? `3px solid ${colors.mainKey}` : 'none')};
 `;
 
 const CreateButton = styled.div`
-  width: 9.5rem;
+  width: 9rem;
   margin: 2rem 5rem;
-  cursor: pointer;
 `;
 
 const Section = styled.div`
   height: 16rem;
-  margin-top: 1.25rem;
-  margin-bottom: 2.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 7rem;
 
   & > div {
     display: flex;
@@ -240,7 +239,7 @@ const Section = styled.div`
   }
 
   & > div > a > label:last-child {
-    color: black;
+    color: ${colors.mainBlack};
     cursor: pointer;
   }
 
@@ -262,7 +261,7 @@ const Comment = styled.p`
   text-align: center;
   font-size: 1.125rem;
   font-weight: 800;
-  color: #b91c1c;
+  color: ${colors.mainKey};
 `;
 
 const PaginationContainer = styled.div`
@@ -292,17 +291,17 @@ const PaginationContainer = styled.div`
       }
 
       &.active {
-        background-color: #3173f6;
-        color: #fff;
+        background-color: ${colors.mainKey};
+        color: ${colors.mainWhite};
 
         & > a {
-          color: #fff;
+          color: ${colors.mainWhite};
         }
       }
 
       &:hover {
         & > a {
-          color: #3173f6;
+          color: ${colors.mainKey};
         }
       }
     }
