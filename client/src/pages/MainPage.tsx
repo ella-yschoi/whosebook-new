@@ -18,7 +18,6 @@ import MainCurationCard from '../components/cards/MainCurationCard';
 import CuratorCard from '../components/cards/CuratorCard';
 import Label from '../components/label/Label';
 import ClockLoading from '../components/Loading/ClockLoading';
-import PencilButton from '../components/buttons/PencilButton';
 import Footer from '../components/Footer/Footer';
 import { colors } from '../styles/theme';
 
@@ -173,7 +172,6 @@ const MainPage = () => {
         </Section>
       </Container>
       <Footer />
-      {memberId !== 0 && <PencilButton />}
     </>
   );
 };
