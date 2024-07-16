@@ -13,7 +13,7 @@ import Label from '../../components/label/Label';
 import Button from '../../components/buttons/Button';
 import ProfileImg from '../../img/defaultProfile.png';
 import BookInfo from '../../components/curations/BookInfo';
-import ClockLoading from '../../components/Loading/ClockLoading';
+import ClockLoading from '../../components/loading/ClockLoading';
 import CurationProfileInfo from '../../components/curations/CurationProfileInfo';
 import CurationDetailInfo from '../../components/curations/CurationDetailInfo';
 import CurationCreatedDate from '../../components/curations/CurationCreatedDate';
@@ -24,9 +24,19 @@ import { RootState } from '../../store/store';
 import { axiosInstance } from '../../api/axios';
 import { SelectedBook } from './CurationWritePage';
 import { customAlert } from '../../components/alert/sweetAlert';
-import { saveReplies, addReply, deleteReply, updateReply } from '../../store/repliesSlice';
-import { getRepliesAPI, postReplyAPI, updateReplyAPI, deleteReplyAPI } from '../../api/replyApi';
-import Footer from '../../components/Footer/Footer';
+import {
+  saveReplies,
+  addReply,
+  deleteReply,
+  updateReply,
+} from '../../store/repliesSlice';
+import {
+  getRepliesAPI,
+  postReplyAPI,
+  updateReplyAPI,
+  deleteReplyAPI,
+} from '../../api/replyApi';
+import Footer from '../../components/footer/Footer';
 
 export interface Curation {
   isSubscribed: boolean;
@@ -336,7 +346,9 @@ const CurationDetailPage = () => {
                     {isEditDeleteVisible && (
                       <EditDeleteButton isVisible={isEditDeleteVisible}>
                         <EditButton onClick={handleEdit}>수정하기</EditButton>
-                        <DeleteButton onClick={handleDelete}>삭제하기</DeleteButton>
+                        <DeleteButton onClick={handleDelete}>
+                          삭제하기
+                        </DeleteButton>
                       </EditDeleteButton>
                     )}
                   </EditDeleteContainer>
@@ -364,67 +376,86 @@ const CurationDetailPage = () => {
                   <CurationCreatedDate createdAt={curation.createdAt} />
                 </DetailInfoRight>
               </GridContainer>
-              <ContentContainer className="content-container">
-                <div dangerouslySetInnerHTML={{ __html: `${curation.content}` }} />
+              <ContentContainer className='content-container'>
+                <div
+                  dangerouslySetInnerHTML={{ __html: `${curation.content}` }}
+                />
               </ContentContainer>
 
               <ItemContainer>
-                <Label type="title" htmlFor="title" content="추천하는 책" />
+                <Label type='title' htmlFor='title' content='추천하는 책' />
                 {books && <BookInfo books={books} />}
               </ItemContainer>
 
               <ItemContainer>
-                <Label type="title" htmlFor="reply" content="댓글 쓰기" />
+                <Label type='title' htmlFor='reply' content='댓글 쓰기' />
                 <Input
-                  id="title"
-                  width="100%"
-                  color="#000"
+                  id='title'
+                  width='100%'
+                  color='#000'
                   value={replyValue}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => setReplyValue(e.target.value)}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setReplyValue(e.target.value)
+                  }
                 />
               </ItemContainer>
 
               <ButtonContainer>
                 <CancelButton>
-                  <Button type="cancel" content="취소" onClick={handleCommentCancel} />
+                  <Button
+                    type='cancel'
+                    content='취소'
+                    onClick={handleCommentCancel}
+                  />
                 </CancelButton>
                 <CreateButton>
-                  <Button type="primary" content="등록" onClick={handleCommentRegister} />
+                  <Button
+                    type='primary'
+                    content='등록'
+                    onClick={handleCommentRegister}
+                  />
                 </CreateButton>
               </ButtonContainer>
 
               <ItemContainer>
                 <RepliesTitle>댓글 {replies?.length | 0}개</RepliesTitle>
                 {isLoading && !replies?.length ? (
-                  <ClockLoading color="#3173f6" style={{ ...loadingStyle }} />
+                  <ClockLoading color='#3173f6' style={{ ...loadingStyle }} />
                 ) : replies?.length ? (
                   replies?.map((e, idx: number) => {
                     const isEditing = editingIndexes[idx];
                     return (
-                      <ReplyContainer key={idx} className="reply-container">
+                      <ReplyContainer key={idx} className='reply-container'>
                         {isEditing ? (
                           <EditContainer key={`edit ${idx}`}>
                             <UserInfo>
                               <ProfileImage>
-                                <DefaultImg src={e.imageUrl || ProfileImg} alt="profileImg" />
+                                <DefaultImg
+                                  src={e.imageUrl || ProfileImg}
+                                  alt='profileImg'
+                                />
                               </ProfileImage>
                               <Nickname>{e.nickname}</Nickname>
                             </UserInfo>
                             <Input
-                              id="title"
-                              width="100%"
-                              color="#000"
+                              id='title'
+                              width='100%'
+                              color='#000'
                               value={editReplyValue}
                               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                                 setEditReplyValue(e.target.value)
                               }
                             />
-                            {!isValidReply(editReplyValue) && <Valid>댓글을 적어주세요.</Valid>}
+                            {!isValidReply(editReplyValue) && (
+                              <Valid>댓글을 적어주세요.</Valid>
+                            )}
                             <ButtonZone>
                               <Button
-                                type="detail"
-                                content="수정완료"
-                                onClick={() => handleEditComplete(e.replyId, idx)}
+                                type='detail'
+                                content='수정완료'
+                                onClick={() =>
+                                  handleEditComplete(e.replyId, idx)
+                                }
                               />
                             </ButtonZone>
                           </EditContainer>
@@ -437,8 +468,12 @@ const CurationDetailPage = () => {
                               nickname={e.nickname}
                               imageUrl={e.imageUrl}
                               content={e.content}
-                              handleCommentEdit={() => handleCommentEdit(e.content, idx)}
-                              handleCommentDelete={() => handleCommentDelete(e.replyId)}
+                              handleCommentEdit={() =>
+                                handleCommentEdit(e.content, idx)
+                              }
+                              handleCommentDelete={() =>
+                                handleCommentDelete(e.replyId)
+                              }
                             />
                             {e.content}
                             <CurationCreatedDate createdAt={e.createdAt} />
@@ -448,14 +483,20 @@ const CurationDetailPage = () => {
                     );
                   })
                 ) : (
-                  <Comment className="reply-container">첫 댓글의 큐레이터가 되어 주세요 😊</Comment>
+                  <Comment className='reply-container'>
+                    첫 댓글의 큐레이터가 되어 주세요 😊
+                  </Comment>
                 )}
               </ItemContainer>
 
               <ButtonContainer>
                 <DetailButton>
                   {replies.length < totalElement && (
-                    <Button type="detail" content="더보기" onClick={hanldeMoreComment} />
+                    <Button
+                      type='detail'
+                      content='더보기'
+                      onClick={hanldeMoreComment}
+                    />
                   )}
                 </DetailButton>
               </ButtonContainer>
@@ -655,7 +696,7 @@ const EditContainer = styled.div`
     width: 100%;
     height: 5rem;
     margin-top: 1rem;
-    border: 1px solid ${({ theme }) => theme.colors.mainGray300};
+    border: 1px solid ${({ theme }) => theme.colors.mainGray400};
   }
 `;
 

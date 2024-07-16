@@ -102,43 +102,48 @@ const ProfileForm = () => {
     <>
       <ProfileFormContainer onSubmit={handleUpdate}>
         <InputForm>
-          <Label type="title" htmlFor="email" content="아이디(이메일)" />
+          <Label type='title' htmlFor='email' content='아이디(이메일)' />
           <div>{myInfo?.email}</div>
         </InputForm>
         <InputForm>
-          <Label type="title" htmlFor="nickName" content="닉네임" />
+          <Label type='title' htmlFor='nickName' content='닉네임' />
           <Input
-            type="text"
+            type='text'
             value={nickname}
-            name="nickname"
-            id="nickname"
-            borderRadius="0.3rem"
-            color="#000"
-            focusMode="true"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNickname(e.target.value)}
-            placeholder="닉네임은 2글자 이상 15글자 미만, 영어. 한글, 숫자만 입력 가능합니다."
+            name='nickname'
+            id='nickname'
+            borderRadius='0.3rem'
+            color='#000'
+            focusMode='true'
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setNickname(e.target.value)
+            }
+            placeholder='닉네임은 2글자 이상 15글자 미만, 영어. 한글, 숫자만 입력 가능합니다.'
           />
           {!handleIsValid('nickname', nickname) && (
-            <Valid>닉네임은 2글자 이상 15글자 미만으로 영어, 한글, 숫자만 입력 가능합니다.</Valid>
+            <Valid>
+              닉네임은 2글자 이상 15글자 미만으로 영어, 한글, 숫자만 입력
+              가능합니다.
+            </Valid>
           )}
         </InputForm>
         <InputForm>
-          <Label type="title" htmlFor="introduction" content="소개글" />
+          <Label type='title' htmlFor='introduction' content='소개글' />
           <Textarea
             value={introduction || ''}
             maxLength={200}
-            id="introduction"
-            name="introduction"
+            id='introduction'
+            name='introduction'
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
               setIntroduction(e.target.value)
             }
             // onChange={handleUpdateFormValue}
-            placeholder="자신을 소개하는 글을 200자 이하로 입력하세요."
+            placeholder='자신을 소개하는 글을 200자 이하로 입력하세요.'
           />
           <IntroduceLenCheck>{introduction?.length}/200</IntroduceLenCheck>
         </InputForm>
         <InputForm>
-          <Label type="title" htmlFor="profileImage" content="프로필 이미지" />
+          <Label type='title' htmlFor='profileImage' content='프로필 이미지' />
           <ImageUpload
             nickname={nickname}
             selectImg={selectImg}
@@ -147,10 +152,10 @@ const ProfileForm = () => {
           />
         </InputForm>
         <InputForm>
-          <Button type="primary" content="발행" />
+          <Button type='primary' content='발행' />
         </InputForm>
       </ProfileFormContainer>
-      <Link to="/mypage/out">
+      <Link to='/mypage/out'>
         <MemberOut>[회원 탈퇴하기]</MemberOut>
       </Link>
     </>
@@ -180,9 +185,9 @@ const InputForm = styled.div`
     margin-bottom: 0;
   }
   ${tw`
-        mb-[1.2rem]
-        flex
-        flex-col
+    mb-[1.2rem]
+    flex
+    flex-col
     `}
 `;
 const Valid = tw.div`
@@ -194,13 +199,13 @@ const Valid = tw.div`
 `;
 const Textarea = styled.textarea`
   ${tw`
-        w-full
-        h-[10rem]
+    w-full
+    h-[10rem]
 
-        bg-[#F8F7F7]
-        border-0
-        rounded-[0.3rem]
-        p-[0.7rem]
+    bg-[#F8F7F7]
+    border-0
+    rounded-[0.3rem]
+    p-[0.7rem]
     `}
   &:focus {
     border: 1px solid #0077ff;
@@ -209,11 +214,11 @@ const Textarea = styled.textarea`
   }
 `;
 const IntroduceLenCheck = styled.div`
-  color: ${({ theme }) => theme.colors.mainGray300};
+  color: ${({ theme }) => theme.colors.mainGray400};
   ${tw`
-        text-right
-        mt-[0.3rem]
-        text-[0.8rem]
+    text-right
+    mt-[0.3rem]
+    text-[0.8rem]
     `}
 `;
 export default ProfileForm;

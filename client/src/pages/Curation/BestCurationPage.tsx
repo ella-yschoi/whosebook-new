@@ -5,13 +5,16 @@ import styled from 'styled-components';
 import { colors, fonts } from '../../styles/theme';
 
 import CategoryTag from '../../components/category/CategoryTag';
-import { LikedCurationAPI, LikedCurationCategoryAPI } from '../../api/curationApi';
+import {
+  LikedCurationAPI,
+  LikedCurationCategoryAPI,
+} from '../../api/curationApi';
 import { ICurationResponseData } from '../../types/main';
 import CurationCard from '../../components/cards/CurationCard';
 import Label from '../../components/label/Label';
 import Button from '../../components/buttons/Button';
-import Footer from '../../components/Footer/Footer';
-import ClockLoading from '../../components/Loading/ClockLoading';
+import Footer from '../../components/footer/Footer';
+import ClockLoading from '../../components/loading/ClockLoading';
 import { customAlert } from '../../components/alert/sweetAlert';
 
 const loadingStyle = {
@@ -28,11 +31,17 @@ const BestCurationPage = () => {
   const categoryParam = searchParams.get('category');
   const pageParam = searchParams.get('page');
 
-  const [bestCurations, setBestCurations] = useState<ICurationResponseData[] | null>(null);
-  const [currentPage, setCurrentPage] = useState<number>((Number(pageParam) - 1) || 0);
+  const [bestCurations, setBestCurations] = useState<
+    ICurationResponseData[] | null
+  >(null);
+  const [currentPage, setCurrentPage] = useState<number>(
+    Number(pageParam) - 1 || 0
+  );
   const [totalBestPage, setTotalBestPage] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [selectCategory, setSelectCategory] = useState<number>(Number(categoryParam) || 0);
+  const [selectCategory, setSelectCategory] = useState<number>(
+    Number(categoryParam) || 0
+  );
 
   const [isAllCategoryBtnActive, setIsAllCategoryBtnActive] = useState(true);
   const itemsPerPage = 9;
@@ -42,7 +51,11 @@ const BestCurationPage = () => {
       setIsLoading(true);
       const response = !categoryParam
         ? await LikedCurationAPI(currentPage + 1, itemsPerPage)
-        : await LikedCurationCategoryAPI(currentPage + 1, itemsPerPage, selectCategory);
+        : await LikedCurationCategoryAPI(
+            currentPage + 1,
+            itemsPerPage,
+            selectCategory
+          );
       if (response) {
         setBestCurations(response.data.data);
         setTotalBestPage(response.data.pageInfo.totalPages);
@@ -128,7 +141,10 @@ const BestCurationPage = () => {
       <Container>
         <TitleContainer>
           <TitleDiv>
-            <AllCategoryBtn onClick={handleAllCategory} isActive={isAllCategoryBtnActive}>
+            <AllCategoryBtn
+              onClick={handleAllCategory}
+              isActive={isAllCategoryBtnActive}
+            >
               전체 카테고리 보기
             </AllCategoryBtn>
           </TitleDiv>
@@ -149,7 +165,10 @@ const BestCurationPage = () => {
           <br />
           <ul>
             {isLoading && (!bestCurations || bestCurations.length === 0) ? (
-              <ClockLoading color='${colors.mainKey}' style={{ ...loadingStyle }} />
+              <ClockLoading
+                color='${colors.mainKey}'
+                style={{ ...loadingStyle }}
+              />
             ) : (
               bestCurations?.map((e) => (
                 <CurationCard
@@ -220,7 +239,8 @@ const AllCategoryBtn = styled.div<{ isActive: boolean }>`
   color: ${colors.mainKey};
   font-family: ${fonts.subBold};
   padding-bottom: ${({ isActive }) => (isActive ? '0' : '3px')};
-  border-bottom: ${({ isActive }) => (isActive ? `3px solid ${colors.mainKey}` : 'none')};
+  border-bottom: ${({ isActive }) =>
+    isActive ? `3px solid ${colors.mainKey}` : 'none'};
 `;
 
 const CreateButton = styled.div`

@@ -84,7 +84,7 @@ const CurationProfileInfo: React.FC<CuratorProps> = ({
       <ProfileInfoLeft>
         <UserInfo>
           <ProfileImage>
-            <DefaultImg src={curatorImage || images.profileImg2} alt="profileImg" />
+            <DefaultImg src={curatorImage || images.defaultProfile} alt="profileImg" />
           </ProfileImage>
           <Nickname onClick={handleNameClick}>{curator}</Nickname>
           {memberId !== curatorId && (

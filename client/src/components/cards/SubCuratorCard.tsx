@@ -31,7 +31,7 @@ const SubCuratorCard = ({
   return (
     <CuratorContainer onClick={handleUserPage}>
       <CuratorLeft>
-        <ProfileImg src={image || images.profileImg2} alt="curaotCardProfileImage" />
+        <ProfileImg src={image || images.defaultProfile} alt="curaotCardProfileImage" />
       </CuratorLeft>
 
       <CuratorRight>

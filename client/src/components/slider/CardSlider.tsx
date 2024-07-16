@@ -24,7 +24,7 @@ const CardSlider = ({ data }: IProps) => {
     <Slider {...settings}>
       {data?.map(({ memberId, image, nickname, mySubscriber }) => (
         <Container key={memberId} onClick={() => navigate(`/userpage/${memberId}`)}>
-          <ProfileImg src={image ?? images.profileImg2} alt="curator profile img" />
+          <ProfileImg src={image ?? images.defaultProfile} alt="curator profile img" />
           <NickName>{nickname}</NickName>
           <Curator>구독자 {mySubscriber}명</Curator>
         </Container>

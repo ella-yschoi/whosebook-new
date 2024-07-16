@@ -11,14 +11,21 @@ import ProfileInfo from '../../components/profiles/ProfileInfo';
 import WrittenList from '../../components/profiles/WrittenList';
 import LikeList from '../../components/profiles/LikeList';
 
-import { ProfileDetailContainer, ProfileAside, ProfileDetailMain, MainContainer } from './MyPage';
-import Footer from '../../components/Footer/Footer';
+import {
+  ProfileDetailContainer,
+  ProfileAside,
+  ProfileDetailMain,
+  MainContainer,
+} from './MyPage';
+import Footer from '../../components/footer/Footer';
 const UserPage = () => {
   const [selected, setSelected] = useState<number>(0);
   const location = useLocation();
 
   useEffect(() => {
-    switch (location.pathname.split('/')[location.pathname.split('/').length - 1]) {
+    switch (
+      location.pathname.split('/')[location.pathname.split('/').length - 1]
+    ) {
       case RoutePath.UserWrittenPage:
         setSelected(0);
         break;

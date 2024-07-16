@@ -17,8 +17,8 @@ import SimpleSlider from '../components/slider/SimpleSlider';
 import MainCurationCard from '../components/cards/MainCurationCard';
 import CuratorCard from '../components/cards/CuratorCard';
 import Label from '../components/label/Label';
-import ClockLoading from '../components/Loading/ClockLoading';
-import Footer from '../components/Footer/Footer';
+import ClockLoading from '../components/loading/ClockLoading';
+import Footer from '../components/footer/Footer';
 import { colors } from '../styles/theme';
 
 const bannerData = [
@@ -41,8 +41,12 @@ const loadingStyle = {
 const MainPage = () => {
   const { memberId } = useSelector((state: RootState) => state.user);
   const [bestCurators, setBestCurators] = useState<ICuratorInfo[] | null>(null);
-  const [bestCurations, setBestCurations] = useState<ICurationResponseData[] | null>(null);
-  const [newCurations, setNewCurations] = useState<ICurationResponseData[] | null>(null);
+  const [bestCurations, setBestCurations] = useState<
+    ICurationResponseData[] | null
+  >(null);
+  const [newCurations, setNewCurations] = useState<
+    ICurationResponseData[] | null
+  >(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getBestCurators = async () => {
@@ -90,21 +94,23 @@ const MainPage = () => {
         </Banner>
         <Section>
           <Label type='title' content='BEST 큐레이터' />
-          <br/>
+          <br />
           <ul>
             {isLoading && !bestCurators?.length ? (
               <ClockLoading color='#3173f6' style={{ ...loadingStyle }} />
             ) : (
-              bestCurators?.map(({ image, memberId, mySubscriber, nickname }) => (
-                <div key={uuid4()}>
-                  <CuratorCard
-                    image={image}
-                    memberId={memberId}
-                    mySubscriber={mySubscriber}
-                    nickname={nickname}
-                  />
-                </div>
-              ))
+              bestCurators?.map(
+                ({ image, memberId, mySubscriber, nickname }) => (
+                  <div key={uuid4()}>
+                    <CuratorCard
+                      image={image}
+                      memberId={memberId}
+                      mySubscriber={mySubscriber}
+                      nickname={nickname}
+                    />
+                  </div>
+                )
+              )
             )}
           </ul>
         </Section>
@@ -120,7 +126,15 @@ const MainPage = () => {
               <ClockLoading color='#3173f6' style={{ ...loadingStyle }} />
             ) : bestCurations?.length ? (
               bestCurations?.map(
-                ({ curator, curationId, emoji, title, content, memberId, curationLikeCount }) => (
+                ({
+                  curator,
+                  curationId,
+                  emoji,
+                  title,
+                  content,
+                  memberId,
+                  curationLikeCount,
+                }) => (
                   <li key={curationId}>
                     <MainCurationCard
                       curator={curator}
@@ -151,7 +165,15 @@ const MainPage = () => {
               <ClockLoading color='#3173f6' style={{ ...loadingStyle }} />
             ) : newCurations?.length ? (
               newCurations?.map(
-                ({ curator, curationId, emoji, title, content, memberId, curationLikeCount }) => (
+                ({
+                  curator,
+                  curationId,
+                  emoji,
+                  title,
+                  content,
+                  memberId,
+                  curationLikeCount,
+                }) => (
                   <li key={curationId}>
                     <MainCurationCard
                       curator={curator}

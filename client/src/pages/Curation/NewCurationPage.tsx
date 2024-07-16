@@ -5,13 +5,16 @@ import styled from 'styled-components';
 import { colors, fonts } from '../../styles/theme';
 
 import CategoryTag from '../../components/category/CategoryTag';
-import { newlyCurationAPI, newlyCurationCategoryAPI } from '../../api/curationApi';
+import {
+  newlyCurationAPI,
+  newlyCurationCategoryAPI,
+} from '../../api/curationApi';
 import { ICurationResponseData } from '../../types/main';
 import CurationCard from '../../components/cards/CurationCard';
 import Label from '../../components/label/Label';
 import Button from '../../components/buttons/Button';
-import Footer from '../../components/Footer/Footer';
-import ClockLoading from '../../components/Loading/ClockLoading';
+import Footer from '../../components/footer/Footer';
+import ClockLoading from '../../components/loading/ClockLoading';
 import { customAlert } from '../../components/alert/sweetAlert';
 
 const loadingStyle = {
@@ -28,11 +31,17 @@ const NewCurationPage = () => {
   const categoryParam = searchParams.get('category');
   const pageParam = searchParams.get('page');
 
-  const [newCurations, setNewCurations] = useState<ICurationResponseData[] | null>(null);
-  const [currentPage, setCurrentPage] = useState<number>((Number(pageParam) - 1) || 0);
+  const [newCurations, setNewCurations] = useState<
+    ICurationResponseData[] | null
+  >(null);
+  const [currentPage, setCurrentPage] = useState<number>(
+    Number(pageParam) - 1 || 0
+  );
   const [totalNewPage, setTotalNewPage] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [selectCategory, setSelectCategory] = useState<number>(Number(categoryParam) || 0);
+  const [selectCategory, setSelectCategory] = useState<number>(
+    Number(categoryParam) || 0
+  );
 
   const [isAllCategoryBtnActive, setIsAllCategoryBtnActive] = useState(true);
   const itemsPerPage = 9;
@@ -43,7 +52,11 @@ const NewCurationPage = () => {
       const response =
         selectCategory === 0
           ? await newlyCurationAPI(currentPage + 1, itemsPerPage)
-          : await newlyCurationCategoryAPI(currentPage + 1, itemsPerPage, selectCategory);
+          : await newlyCurationCategoryAPI(
+              currentPage + 1,
+              itemsPerPage,
+              selectCategory
+            );
       if (response) {
         setNewCurations(response.data.data);
         setTotalNewPage(response.data.pageInfo.totalPages);
@@ -126,7 +139,10 @@ const NewCurationPage = () => {
       <Container>
         <TitleContainer>
           <TitleDiv>
-            <AllCategoryBtn onClick={handleAllCategory} isActive={isAllCategoryBtnActive}>
+            <AllCategoryBtn
+              onClick={handleAllCategory}
+              isActive={isAllCategoryBtnActive}
+            >
               전체 카테고리 보기
             </AllCategoryBtn>
           </TitleDiv>
@@ -147,7 +163,10 @@ const NewCurationPage = () => {
           <br />
           <ul>
             {isLoading && (!newCurations || newCurations.length === 0) ? (
-              <ClockLoading color='${colors.mainKey}' style={{ ...loadingStyle }} />
+              <ClockLoading
+                color='${colors.mainKey}'
+                style={{ ...loadingStyle }}
+              />
             ) : (
               newCurations?.map((e) => (
                 <CurationCard
@@ -218,7 +237,8 @@ const AllCategoryBtn = styled.div<{ isActive: boolean }>`
   color: ${colors.mainKey};
   font-family: ${fonts.subBold};
   padding-bottom: ${({ isActive }) => (isActive ? '0' : '3px')};
-  border-bottom: ${({ isActive }) => (isActive ? `3px solid ${colors.mainKey}` : 'none')};
+  border-bottom: ${({ isActive }) =>
+    isActive ? `3px solid ${colors.mainKey}` : 'none'};
 `;
 
 const CreateButton = styled.div`

@@ -14,14 +14,16 @@ import ProfileForm from '../../components/profiles/ProfileForm';
 import WrittenList from '../../components/profiles/WrittenList';
 import LikeList from '../../components/profiles/LikeList';
 import CuraotrList from '../../components/profiles/CuratorList';
-import Footer from '../../components/Footer/Footer';
+import Footer from '../../components/footer/Footer';
 
 const MyPage = () => {
   const [selected, setSelected] = useState<number>(0);
   const location = useLocation();
 
   useEffect(() => {
-    switch (location.pathname.split('/')[location.pathname.split('/').length - 1]) {
+    switch (
+      location.pathname.split('/')[location.pathname.split('/').length - 1]
+    ) {
       case RoutePath.MyWrittenPage:
         setSelected(1);
         break;
@@ -44,13 +46,20 @@ const MyPage = () => {
         <ProfileDetailContainer>
           <ProfileAside>
             <ul>
-              <Filter type={UserPageType.MYPAGE} selected={selected} setSelected={setSelected} />
+              <Filter
+                type={UserPageType.MYPAGE}
+                selected={selected}
+                setSelected={setSelected}
+              />
             </ul>
           </ProfileAside>
           <ProfileDetailMain>
             <MainContainer>
               <Routes>
-                <Route path={RoutePath.MyInfoUpdate} element={<ProfileForm />} />
+                <Route
+                  path={RoutePath.MyInfoUpdate}
+                  element={<ProfileForm />}
+                />
                 <Route path={RoutePath.MyPageOut} element={<ProfileOut />} />
                 <Route
                   path={RoutePath.MyWrittenPage}
@@ -60,7 +69,10 @@ const MyPage = () => {
                   path={RoutePath.MyLikePage}
                   element={<LikeList type={UserPageType.MYPAGE} />}
                 />
-                <Route path={RoutePath.MySubcriberPage} element={<CuraotrList />} />
+                <Route
+                  path={RoutePath.MySubcriberPage}
+                  element={<CuraotrList />}
+                />
               </Routes>
             </MainContainer>
           </ProfileDetailMain>
