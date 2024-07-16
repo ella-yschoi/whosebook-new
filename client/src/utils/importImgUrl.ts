@@ -1,5 +1,6 @@
 import banner from '../../src/assets/banner.png';
 import githubIcon from '../../src/assets/github_icon.png';
+import xIcon from '../../src/assets/x.png';
 import googleIcon from '../../src/assets/google.png';
 import kakaoIcon from '../../src/assets/kakaotalk_logo.png';
 import naverIcon from '../../src/assets/naver_logo.png';
@@ -14,6 +15,7 @@ import serverError from '../../src/assets/500.png';
 export const images = {
   banner,
   githubIcon,
+  xIcon,
   googleIcon,
   kakaoIcon,
   naverIcon,

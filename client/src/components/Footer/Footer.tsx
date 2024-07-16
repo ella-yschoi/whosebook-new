@@ -1,78 +1,23 @@
-import styled from '@emotion/styled';
+import styled from 'styled-components';
+import { colors } from '../../styles/theme';
+
 import { v4 as uuid4 } from 'uuid';
 import { images } from '../../utils/importImgUrl';
-
-const projectInfo = [
-  {
-    id: uuid4(),
-    href: 'https://www.notion.so/codestates/4-d7dbd17f234d4d27898663cf3349183f?p=c9f9f926adaa4137bb854e1bcc8081ee&pm=s',
-    title: 'API 문서',
-  },
-  {
-    id: uuid4(),
-    href: 'https://www.notion.so/codestates/4-d7dbd17f234d4d27898663cf3349183f?p=b419aa73b8c54a218da47ec0d2fe2704&pm=s',
-    title: '화면 정의서',
-  },
-  {
-    id: uuid4(),
-    href: 'https://www.notion.so/codestates/4-d7dbd17f234d4d27898663cf3349183f?p=b44457cdba2946589ca92bd8529c0889&pm=s',
-    title: '사용자 요구사항 정의서',
-  },
-  {
-    id: uuid4(),
-    href: 'https://www.notion.so/codestates/4-d7dbd17f234d4d27898663cf3349183f?p=c9f9f926adaa4137bb854e1bcc8081ee&pm=s',
-    title: '서비스 메뉴얼',
-  },
-];
 
 const imgs = [
   {
     id: uuid4(),
     imgUrl: images.githubIcon,
-    title: '프로젝트 깃허브로 가기',
-    href: 'https://github.com/codestates-seb/seb44_main_004/tree/main',
+    title: 'WhoseBook Github',
+    href: 'https://github.com/ella-yschoi/whosebook-new',
+    className: 'github-icon'
   },
   {
     id: uuid4(),
-    imgUrl: images.notionIcon,
-    title: '프로젝트 노션 문서보러가기',
-    href: 'https://www.notion.so/codestates/4-d7dbd17f234d4d27898663cf3349183f',
-  },
-  {
-    id: uuid4(),
-    imgUrl: images.fe1,
-    title: 'jiye-7',
-    href: 'https://github.com/jiye-7',
-  },
-  {
-    id: uuid4(),
-    imgUrl: images.fe2,
-    title: 'jeongjwon',
-    href: 'https://github.com/jeongjwon',
-  },
-  {
-    id: uuid4(),
-    imgUrl: images.fe3,
-    title: 'ella-yschoi',
-    href: 'https://github.com/ella-yschoi',
-  },
-  {
-    id: uuid4(),
-    imgUrl: images.be1,
-    title: 'WOOK0112',
-    href: 'https://github.com/WOOK0112',
-  },
-  {
-    id: uuid4(),
-    imgUrl: images.be2,
-    title: 'Kyunju',
-    href: 'https://github.com/Kyunju',
-  },
-  {
-    id: uuid4(),
-    imgUrl: images.be3,
-    title: 'HanJuYoung309',
-    href: 'https://github.com/HanJuYoung309',
+    imgUrl: images.xIcon,
+    title: 'WhoseBook X',
+    href: 'https://x.com/WhoseBook',
+    className: 'x-icon'
   },
 ];
 
@@ -80,111 +25,108 @@ const Footer = () => {
   return (
     <Container>
       <FooterWrapper>
-        <ServiceTitle>
-          <h5 className="footer-title">WhoseBook</h5>
-          <p>후즈북은 나만의 책을 읽고 싶은 사람들을 위한</p>
-          <p>추천 기반 도서 큐레이션 서비스 입니다.</p>
-        </ServiceTitle>
-        <ServiceInfo>
-          <ProjectInfoList>
-            {projectInfo.map(({ id, href, title }) => (
-              <li key={id}>
-                <a href={href} target="_blank">
-                  {title}
-                </a>
-              </li>
-            ))}
-          </ProjectInfoList>
-          <TeamMemberInfo>
-            {imgs.map(({ id, imgUrl, title, href }) => (
-              <li key={id}>
-                <a href={href} target="_blank">
-                  <img src={imgUrl} title={title} alt={title} />
-                </a>
-              </li>
-            ))}
-          </TeamMemberInfo>
-        </ServiceInfo>
+        <IconsWrapper>
+          <ServiceTitle>
+            <h5 className="footer-title">WhoseBook</h5>
+          </ServiceTitle>
+          {imgs.map(({ id, imgUrl, title, href, className }) => (
+            <li key={id}>
+              <a href={href} target='_blank'>
+                <IconImage src={imgUrl} title={title} alt={title} className={className} />
+              </a>
+            </li>
+          ))}
+        </IconsWrapper>
+        <Divider />
+        <FooterContent>
+          <LeftContent>
+            <p>개인정보보호책임자: 최연수 | 이메일: whosebook.official@gmail.com</p>
+            <p>후즈북 팀: 책4냥꾼 | 사이트 우측 하단 버튼을 통해 문의하실 수 있습니다.</p>
+          </LeftContent>
+          <RightContent>
+            <p>©책사냥꾼. ALL RIGHTS RESERVED</p>
+          </RightContent>
+        </FooterContent>
       </FooterWrapper>
-      <CopyLight>
-        Copyright 2023. 책4냥꾼. All rights reserved.
-      </CopyLight>
     </Container>
   );
 };
 
 const Container = styled.div`
-  background-color: #1F558D;
+  background-color: ${colors.mainGray100};
+  padding: 2rem;
   margin-top: 8rem;
-  padding: 1.25rem;
 `;
 
-const FooterWrapper = styled.footer`
-  display: flex;
-  justify-content: space-between;
+const FooterWrapper = styled.div`
+  max-width: 59.3rem;
+  margin: 0 auto;
 `;
 
 const ServiceTitle = styled.div`
-  h5 {
-    padding-bottom: 1.25rem;
+  margin-right: 44rem;
+`;
+
+const IconsWrapper = styled.ul`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  li {
+    margin-right: 0.8rem;
+    a {
+      display: block;
+    }
   }
+`;
+
+const IconImage = styled.img`
+  &.github-icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  &.x-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top: 0.1rem;
+  }
+`;
+
+const Divider = styled.div`
+  width: 100%;
+  height: 0.5px;
+  background-color: ${colors.mainGray300};
+  margin: 0.8rem 0;
+`;
+
+const FooterContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+`;
+
+const LeftContent = styled.div`
+  flex: 1;
   p {
-    color: white;
-    margin-top: 0.5rem;
+    color: ${colors.mainBlack};
+    margin: 0.5rem 0;
     font-size: 0.875rem;
   }
 `;
 
-const ServiceInfo = styled.div`
+const RightContent = styled.div`
+  flex: 1;
   display: flex;
-  flex-direction: column;
-  & > ul {
-    display: flex;
+  justify-content: flex-end;
+  p {
+    color: ${colors.mainBlack};
+    margin: 0.5rem 0;
+    font-size: 0.875rem;
   }
-`;
-
-const ProjectInfoList = styled.ul`
-  list-style: none;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 0;
-  margin: 20px 5px;
-  li {
-    margin-right: 1.75rem;
-    color: white;
-    font-size: 0.75rem;
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-`;
-
-const TeamMemberInfo = styled.ul`
-  list-style: none;
-  display: flex;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-  li {
-    margin-right: 1rem;
-    a {
-      display: block;
-      img {
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 50%;
-      }
-    }
-  }
-`;
-
-const CopyLight = styled.p`
-  text-align: right;
-  font-size: 0.75rem;
-  color: white;
-  padding-right: 1.75rem;
-  padding-top: 0.5rem;
 `;
 
 export default Footer;
