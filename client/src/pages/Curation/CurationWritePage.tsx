@@ -176,7 +176,6 @@ const CurationWritePage = () => {
               id='title'
               placeholder='큐레이션의 제목을 입력해주세요'
               width='100%'
-              color='#000'
               value={title}
               onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangeTitle(e.target.value)}
             />
@@ -190,7 +189,6 @@ const CurationWritePage = () => {
               id='emoji'
               placeholder='큐레이션에 어울리는 이모지를 입력해주세요'
               width='100%'
-              color='#000'
               value={emoji}
               onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangeEmoji(e.target.value)}
             />
@@ -316,7 +314,6 @@ const SearchInputButton = styled.label`
   border: 1px solid ${colors.mainGray300};
   border-radius: 0.3rem;
   color: ${colors.mainGray400};
-  font-size: 0.9rem;
   font-weight: 100;
   &:hover {
     background-color: ${colors.mainGray100};
@@ -342,7 +339,6 @@ const RadioButtonLabel = styled.label`
   align-items: center;
   font-family: ${fonts.subThin};
   color: ${colors.mainGray400};
-
   input[type='radio'] {
     appearance: none;
     border: 1px solid ${colors.mainGray300};
@@ -359,7 +355,6 @@ const RadioButtonLabel = styled.label`
       border: 0.3rem solid ${colors.mainKey};
     }
   }
-
   span {
     font-family: ${fonts.subThin};
   }
@@ -376,6 +371,6 @@ const PrimaryButton = styled.div`
 const ValidationText = styled.p`
   margin-top: 0.6rem;
   text-align: right;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: ${colors.mainRed100};
 `;

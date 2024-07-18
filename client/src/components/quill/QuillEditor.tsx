@@ -1,6 +1,9 @@
 import { MutableRefObject, useMemo, memo, useEffect } from 'react';
+
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { colors, fonts } from '../../styles/theme';
+
 import { axiosInstance } from '../../api/axios';
 import { customAlert } from '../../components/alert/sweetAlert';
 
@@ -33,8 +36,8 @@ const QuillEditor = memo(({ quillRef, contentValue, setContentValue }: QuillEdit
     const maxSize = 2 * 1024 * 1024;
     if (file && file.size > maxSize) {
       customAlert({
-        title: '이미지 파일 사이즈를 확인해주세요!',
-        text: '이미지 파일은 2MB 이하로만 등록 가능합니다 :)',
+        title: '이미지 파일 사이즈를 확인해주세요',
+        text: '이미지 파일은 2MB 이하로만 등록 할 수 있어요 :)',
         icon: 'warning',
         confirmButtonText: '확인',
         confirmButtonColor: '#F1C93B',
@@ -129,19 +132,25 @@ const QuillEditor = memo(({ quillRef, contentValue, setContentValue }: QuillEdit
       <style>
         {`
           .ql-toolbar {
-            border: none !important;
-            border-radius: 0.3rem 0.3rem 0rem 0rem;
-            background-color: #f8f7f7;
+            border: 1px solid ${colors.mainGray300};
+            border-radius: 0.3rem 0.3rem 0 0;
           }
           .ql-container.ql-snow {
-            border: none !important;
-            border-radius: 0rem 0rem 0.3rem 0.3rem;
-
-            background-color: #f8f7f7;
+            border: 1px solid ${colors.mainGray300};
+            border-top: none;
+            border-radius: 0 0 0.3rem 0.3rem;
+            background-color: ${colors.mainWhite};
             height: 18.75rem;
           }
+          .ql-editor {
+            font-family: ${fonts.subThin};
+            color: ${colors.mainGray400};
+            font-size: 0.9rem !important;
+            font-style: normal !important;
+          }
           .ql-editor .ql-placeholder {
-            font-style: normal;
+            font-family: ${fonts.subThin};
+            color: ${colors.mainGray400};
           }
         `}
       </style>
@@ -153,8 +162,8 @@ const QuillEditor = memo(({ quillRef, contentValue, setContentValue }: QuillEdit
         }}
         modules={modules}
         formats={formats}
-        theme="snow"
-        placeholder="큐레이션의 내용을 입력해 주세요"
+        theme='snow'
+        placeholder='큐레이션의 내용을 입력해 주세요'
         value={contentValue}
         onChange={setContentValue}
       />
