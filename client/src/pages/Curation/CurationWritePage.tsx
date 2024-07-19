@@ -1,19 +1,19 @@
 import { useState, useRef, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { axiosInstance } from '../../api/axios';
 
 import styled from 'styled-components';
 import { colors, fonts } from '../../styles/theme';
 
-import useInput from '../../hooks/useInput';
 import QuillEditor from '../../components/quill/QuillEditor';
+import useInput from '../../hooks/useInput';
 import Input from '../../components/input/Input';
 import Label from '../../components/label/Label';
 import Button from '../../components/buttons/Button';
 import SelectBox from '../../components/input/SelectBox';
 import SearchModal from '../../components/modals/SearchModal';
 import BookInfo from '../../components/curations/BookInfo';
-import { axiosInstance } from '../../api/axios';
 import Footer from '../../components/footer/Footer';
 
 export interface Book {
@@ -41,7 +41,7 @@ export interface SelectedBook {
 
 const CurationWritePage = () => {
   const navigate = useNavigate();
-  // form
+
   const [title, titleValid, handleChangeTitle, handleValidateTitle] = useInput<string>(
     '',
     (title: string) => title.length > 0 && title.length < 100
@@ -62,6 +62,7 @@ const CurationWritePage = () => {
     null,
     (book: SelectedBook | null) => book !== null
   );
+
   const [imageIds] = useState<string[]>([]);
   const [visibilityValue, setVisibilityValue] = useState('PUBLIC');
 
@@ -173,10 +174,11 @@ const CurationWritePage = () => {
           <ItemContainer>
             <Label type='title' htmlFor='title' content='제목' />
             <Input
+              value={title}
               id='title'
               placeholder='큐레이션의 제목을 입력해주세요'
+              focusMode='true'
               width='100%'
-              value={title}
               onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangeTitle(e.target.value)}
             />
             {!titleValid && (
@@ -186,13 +188,14 @@ const CurationWritePage = () => {
           <ItemContainer>
             <Label type='title' htmlFor='emoji' content='이모지' />
             <Input
+              value={emoji}
               id='emoji'
               placeholder='큐레이션에 어울리는 이모지를 입력해주세요'
+              focusMode='true'
               width='100%'
-              value={emoji}
               onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangeEmoji(e.target.value)}
             />
-            {!emojiValid && <ValidationText>이모지는 최대 5개까지 선택할 수 있어요</ValidationText>}
+            {!emojiValid && <ValidationText>이모지는 최대 5개까지 입력할 수 있어요</ValidationText>}
           </ItemContainer>
           <ItemContainer>
             <Label type='title' htmlFor='content' content='내용' />
@@ -216,7 +219,7 @@ const CurationWritePage = () => {
                 추천하는 책을 검색해 등록해 주세요
               </SearchInputButton>
             </SearchInputContainer>
-            {!bookValid && <ValidationText>책 1권 이상을 검색해 등록해 주세요</ValidationText>}
+            {!bookValid && <ValidationText>책 1권을 검색해 등록해 주세요</ValidationText>}
           </ItemContainer>
           <ItemContainer>
             <Label type='title' content='큐레이션 공개 여부' />
@@ -315,6 +318,7 @@ const SearchInputButton = styled.label`
   border-radius: 0.3rem;
   color: ${colors.mainGray400};
   font-weight: 100;
+  font-size: 0.9rem;
   &:hover {
     background-color: ${colors.mainGray100};
   }
@@ -331,7 +335,7 @@ const RadioButtonContainer = styled.div`
   gap: 2rem;
   margin: 0rem 3rem 3rem -0.3rem;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.1rem;
 `;
 
 const RadioButtonLabel = styled.label`
@@ -357,6 +361,7 @@ const RadioButtonLabel = styled.label`
   }
   span {
     font-family: ${fonts.subThin};
+    color: ${colors.mainBlack};
   }
 `;
 

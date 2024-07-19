@@ -144,9 +144,8 @@ const QuillEditor = memo(({ quillRef, contentValue, setContentValue }: QuillEdit
           }
           .ql-editor {
             font-family: ${fonts.subThin};
-            color: ${colors.mainGray400};
-            font-size: 0.9rem !important;
-            font-style: normal !important;
+            color: ${colors.mainBlack};
+            font-size: 1rem;
           }
           .ql-editor .ql-placeholder {
             font-family: ${fonts.subThin};
@@ -163,7 +162,6 @@ const QuillEditor = memo(({ quillRef, contentValue, setContentValue }: QuillEdit
         modules={modules}
         formats={formats}
         theme='snow'
-        placeholder='큐레이션의 내용을 입력해 주세요'
         value={contentValue}
         onChange={setContentValue}
       />

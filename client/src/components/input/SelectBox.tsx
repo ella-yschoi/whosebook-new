@@ -30,6 +30,7 @@ const CategorySelectBox = ({ categoryName, setCategoryId }: CategorySelectBoxPro
   const handleOnClick = (category: OptionData) => {
     setCategoryId(category.categoryId);
     setCurrentValue(category.name);
+    setIsShow(false); // Select box가 닫히도록 설정
   };
 
   useEffect(() => {
@@ -39,11 +40,13 @@ const CategorySelectBox = ({ categoryName, setCategoryId }: CategorySelectBoxPro
 
   return (
     <SelectBox onClick={() => setIsShow((prev) => !prev)}>
-      <CategoryLabel>{currentValue}</CategoryLabel>
+      <CategoryLabel isSelected={currentValue !== '추천하는 책의 카테고리를 선택해주세요'}>
+        {currentValue}
+      </CategoryLabel>
       <SelectOptions show={isShow}>
         {category?.map((category, idx) => {
           return (
-            <Option key={idx} value={category.name} onClick={() => handleOnClick(category)}>
+            <Option key={idx} value={category.name} onClick={(e) => {e.stopPropagation(); handleOnClick(category);}}>
               {category.name}
             </Option>
           );
@@ -76,11 +79,11 @@ const SelectBox = styled.div`
   }
 `;
 
-const CategoryLabel = styled.label`
+const CategoryLabel = styled.label<{ isSelected: boolean }>`
   font-size: 0.9rem;
   margin: 5px;
   text-align: center;
-  color: ${colors.mainGray400};
+  color: ${({ isSelected }) => (isSelected ? colors.mainBlack : colors.mainGray400)};
 `;
 
 const SelectOptions = styled.ul<{ show: boolean }>`
@@ -96,6 +99,7 @@ const SelectOptions = styled.ul<{ show: boolean }>`
   border-radius: 0.3rem;
   box-shadow: ${colors.mainGray300} 3px 3px 12px;
   background-color: ${colors.mainWhite};
+  z-index: 1000;
 `;
 
 const Option = styled.li`
