@@ -210,6 +210,9 @@ const Menu = styled.li<{ selectMenu?: boolean }>`
     selectMenu ? `solid 2px ${colors.mainKey}` : `solid 2px transparent`};
   font-size: 1.1rem;
   font-family: ${fonts.subBold};
+  &:hover {
+    color: ${colors.mainKey};
+  }
 `;
 
 const LogoImg = styled.img`
