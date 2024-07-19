@@ -19,6 +19,7 @@ export type ButtonType =
   | 'category'
   | 'disabled'
   | 'create';
+
 interface ButtonProps {
   type?: ButtonType;
   width?: string;
@@ -34,6 +35,7 @@ interface ButtonProps {
   isSelected?: boolean;
   disabled?: boolean;
   onClick?: (e: MouseEvent) => void;
+  icon?: string;
 }
 
 const Button = (props: ButtonProps) => {
@@ -52,6 +54,7 @@ const Button = (props: ButtonProps) => {
     isSelected,
     disabled,
     onClick,
+    icon,
   } = props;
 
   return (
@@ -70,6 +73,7 @@ const Button = (props: ButtonProps) => {
       disabled={disabled}
       onClick={onClick}
     >
+      {icon && <Icon src={icon} alt="icon" />}
       {content}
     </StyledButton>
   );
@@ -234,6 +238,12 @@ const StyledButton = styled.button<ButtonProps>`
         transform: scale(0.95);
       }
     `}
+`;
+
+const Icon = styled.img`
+  width: 1rem;
+  height: 1rem;
+  margin: 0.14rem 0.5rem 0 0;
 `;
 
 export default Button;
