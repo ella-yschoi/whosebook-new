@@ -41,7 +41,7 @@ const Footer = () => {
         <FooterContent>
           <LeftContent>
             <p>개인정보보호책임자: 최연수 | 이메일: whosebook.official@gmail.com</p>
-            <p>후즈북 팀: 책4냥꾼 | 사이트 우측 하단 버튼을 통해 문의하실 수 있습니다.</p>
+            <p>후즈북 팀: 책사냥꾼 | 사이트 우측 하단 버튼을 통해 문의하실 수 있습니다.</p>
           </LeftContent>
           <RightContent>
             <p>©책사냥꾼. ALL RIGHTS RESERVED</p>
