@@ -118,7 +118,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding-top: 7rem;
+  padding-top: 8rem;
+  padding-bottom: 6rem;
 `;
 
 const Direction = styled.div`
