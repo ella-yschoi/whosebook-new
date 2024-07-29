@@ -12,7 +12,12 @@ interface IProps {
 const ClockLoading = ({ loading, color, speedMultiplier, style, size }: IProps) => {
   return (
     <div style={{ ...style }}>
-      <ClockLoader loading={loading} color={color} speedMultiplier={speedMultiplier} size={size} />
+      <ClockLoader
+        loading={loading}
+        color={color}
+        speedMultiplier={speedMultiplier}
+        size={size}
+      />
     </div>
   );
 };

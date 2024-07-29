@@ -31,7 +31,7 @@ const SubCuratorCard = ({
   return (
     <CuratorContainer onClick={handleUserPage}>
       <CuratorLeft>
-        <ProfileImg src={image || images.profileImg2} alt="curaotCardProfileImage" />
+        <ProfileImg src={image || images.defaultProfile} alt="curaotCardProfileImage" />
       </CuratorLeft>
 
       <CuratorRight>
@@ -57,7 +57,7 @@ const CuratorContainer = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.mainPastelBlue300};
+    background-color: ${({ theme }) => theme.colors.mainBlue100};
     color: white;
 
     div#introduce {

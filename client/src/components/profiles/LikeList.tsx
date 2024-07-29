@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import ProfileCuration from './ProfileCard';
-import ClockLoading from '../Loading/ClockLoading';
+import ClockLoading from '../loading/ClockLoading';
 import { UserPageType } from '../../types';
 import { CurationProps } from '../../types/card';
-import { getLikeCuratoionsAPI, getUserLikeCurationsAPI } from '../../api/profileApi';
+import {
+  getLikeCuratoionsAPI,
+  getUserLikeCurationsAPI,
+} from '../../api/profileApi';
 import { Comment } from './WrittenList';
 import { itemsPerSize } from '../../types';
 
@@ -25,7 +28,9 @@ const LikeList = ({ type }: LikeListProps) => {
 
   const { memberId } = useParams();
 
-  const [likeCurations, setLikeCurations] = useState<CurationProps[] | null>(null);
+  const [likeCurations, setLikeCurations] = useState<CurationProps[] | null>(
+    null
+  );
   const [totalLikeCurations, setTotalLikeCurations] = useState<number>(0);
   const [likePage, setLikePage] = useState<number>((Number(pageParm) - 1) | 0);
   const [totalLikePage, setTotalLikePage] = useState<number>(0);
@@ -38,7 +43,11 @@ const LikeList = ({ type }: LikeListProps) => {
       const response =
         type === UserPageType.MYPAGE
           ? await getLikeCuratoionsAPI(likePage + 1, itemsPerSize)
-          : await getUserLikeCurationsAPI(Number(memberId), likePage + 1, itemsPerSize);
+          : await getUserLikeCurationsAPI(
+              Number(memberId),
+              likePage + 1,
+              itemsPerSize
+            );
       if (response) {
         setLikeCurations(response.data.data);
         setTotalLikeCurations(response.data.pageInfo.totalElement);
@@ -57,7 +66,11 @@ const LikeList = ({ type }: LikeListProps) => {
     if (type === UserPageType.MYPAGE) {
       navigate(`/mypage/like?page=${selectedPage + 1}&size=${itemsPerSize}`);
     } else {
-      navigate(`/userpage/${memberId}/like?page=${selectedPage + 1}&size=${itemsPerSize}`);
+      navigate(
+        `/userpage/${memberId}/like?page=${
+          selectedPage + 1
+        }&size=${itemsPerSize}`
+      );
     }
   };
   useEffect(() => {
@@ -71,7 +84,7 @@ const LikeList = ({ type }: LikeListProps) => {
   return (
     <>
       {isLoading && !likeCurations?.length ? (
-        <ClockLoading color="#3173f6" style={{ ...loadingStyle }} />
+        <ClockLoading color='#3173f6' style={{ ...loadingStyle }} />
       ) : likeCurations?.length ? (
         <>
           {totalLikeCurations} 개의 큐레이션

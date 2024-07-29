@@ -1,15 +1,18 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import tw from 'twin.macro';
+
+import styled from 'styled-components';
+import { colors, fonts } from '../../styles/theme';
 
 import { images } from '../../utils/importImgUrl';
 import { IUserLoginData, IUserLoginFormValid } from '../../types/user';
 import { FormType, handleIsValid } from '../../utils/validation';
 import { loginAPI } from '../../api/userApi';
 import { VITE_OAUTH_GOOGLE_REDIRECT_URL } from '../../utils/envValiable';
-import Label from '../../components/label/Label';
+
 import Input from '../../components/input/Input';
 import Button from '../../components/buttons/Button';
+import Footer from '../../components/footer/Footer';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -62,145 +65,114 @@ const SignIn = () => {
   };
 
   return (
-    <Container>
-      <HeaderWrap>
-        <img src={images.whoseBookLogo} alt="whose book logo" />
-        <header className="title">후즈북</header>
-      </HeaderWrap>
-      <Form onSubmit={handleLogin}>
-        <ItemWrap>
-          <Label type="title" htmlFor="username" content="이메일" />
-          <Input
-            id="username"
-            name="username"
-            placeholder="이메일을 입력해주세요"
-            onChange={handleUpdateFormValue}
+    <>
+      <Container>
+        <Direction>오늘은 어떤 책을 읽어볼까요?</Direction>
+        <HeaderWrap>
+          <header className='title'>후즈북 로그인</header>
+        </HeaderWrap>
+        <Form onSubmit={handleLogin}>
+          <ItemWrapper>
+            <Input
+              id='username'
+              name='username'
+              focusMode='true'
+              placeholder='이메일을 입력해주세요'
+              onChange={handleUpdateFormValue} />
+          </ItemWrapper>
+          <PasswordWrapper>
+            <Input
+              id='password'
+              name='password'
+              type='password'
+              focusMode='true'
+              placeholder='비밀번호를 입력해주세요'
+              onChange={handleUpdateFormValue} />
+          </PasswordWrapper>
+          <ItemWrapper>
+            <Info>
+              회원이 아니신가요? <Link to='/register'>회원가입 하기</Link>
+            </Info>
+          </ItemWrapper>
+          <Button
+            content='일반 로그인'
+            type='primary'
+            icon={images.defaultProfile}
           />
-          {!formValid.username && formValue.username && (
-            <Valid>올바른 이메일 형식이 아닙니다.</Valid>
-          )}
-        </ItemWrap>
-        <ItemWrap>
-          <Label type="title" htmlFor="password" content="비밀번호" />
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            placeholder="비밀번호를 입력해주세요."
-            onChange={handleUpdateFormValue}
+          <Button
+            content='구글 로그인'
+            type='primary'
+            icon={images.googleIcon}
+            onClick={handleGoogleOAuthLogin}
           />
-          {!formValid.password && formValue.password && (
-            <>
-              <Valid>영문, 숫자, 특수문자(!@#$%^&*)를 각 1개 포함,</Valid>
-              <Valid>8자 이상 15자 미만만 입력가능합니다.</Valid>
-            </>
-          )}
-        </ItemWrap>
-        <ItemWrap>
-          <Info>
-            회원이 아니시라면? <Link to="/register">회원가입하러 가기</Link>
-          </Info>
-        </ItemWrap>
-        <Button
-          content="로그인"
-          type={formValid.username && formValid.password ? 'primary' : 'disabled'}
-          disabled={!(formValid.username && formValid.password)}
-        />
-        <Line />
-        <SocialLoginForm>
-          <SocialItemItemWrap onClick={handleGoogleOAuthLogin}>
-            <GoogleLogoImg src={images.googleIcon} alt="google social login image" />
-            <Button content="구글로 로그인하기" color="#371c1d" />
-          </SocialItemItemWrap>
-        </SocialLoginForm>
-      </Form>
-    </Container>
+        </Form>
+      </Container>
+      <Footer />
+    </>
   );
 };
 
-const Container = tw.div`
-  flex
-  flex-col
-  items-center
-  justify-center
-  w-full
-  pt-28
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 8rem;
+  padding-bottom: 6rem;
 `;
 
-const HeaderWrap = tw.header`
-  flex
-  items-center
-  mb-10
-  [> img]:w-11
-  [> img]:mr-4
+const Direction = styled.div`
+  text-align: center;
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+  color: ${colors.mainGray400};
 `;
 
-const Form = tw.form`
-  flex
-  flex-col
-  items-center
-  justify-center
-  min-w-min
-  w-[33rem]
-  px-1
-  py-20
-  pb-20
-  bg-gray-200
-  rounded-xl
-  shadow-lg
-  shadow-gray-300
-  [> button]:w-3/5
+const HeaderWrap = styled.header`
+  display: flex;
+  align-items: center;
 `;
 
-const ItemWrap = tw.div`
-  w-3/5
-  mb-8
-  [> input]:mt-3
-  [> div]:mt-3
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: min-content;
+  width: 33rem;
+  padding: 2rem 0 5rem 0;
+
+  button {
+    width: 60%;
+    margin-bottom: 0.7rem;
+    font-family: ${fonts.subBold};
+  }
 `;
 
-const Info = tw.p`
-  text-sm
-  text-gray-500
-  [> a]:text-blue-700
-  [> a]:font-bold
+const ItemWrapper = styled.div`
+  width: 60%;
+  margin-bottom: 0.3rem;
 `;
 
-const Line = tw.div`
-  w-[75%]
-  border-t-[1px]
-  border-solid
-  border-gray-400
-  mt-10
+const PasswordWrapper = styled.div`
+  width: 60%;
+  margin-bottom: 1rem;
+
+  input {
+    margin-top: 0.5rem;
+  }
 `;
 
-const SocialLoginForm = tw.div`
-  mt-10
-  w-3/5
-  [> div]:first:bg-[#fff]
-  [> div]:mb-4
-`;
+const Info = styled.p`
+  font-size: 0.875rem;
+  color: ${colors.mainGray400};
+  margin-bottom: 1.5rem;
 
-const SocialItemItemWrap = tw.div`
-  flex
-  justify-center
-  items-center
-  rounded-lg
-  cursor-pointer
-  [> button]:w-1/2
-`;
-
-const GoogleLogoImg = tw.img`
-  w-6
-  h-6
-  `;
-
-const Valid = tw.p`
-  mt-2
-  text-center
-  text-xs
-  text-red-400
-  [> p]:last:mt-0
+  a {
+    color: ${colors.mainKey};
+    font-weight: bold;
+  }
 `;
 
 export default SignIn;

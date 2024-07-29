@@ -1,16 +1,16 @@
 import { CSSProperties } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
 import NextArrow from './NextArrow';
 import PrevArrow from './PrevArrow';
-import { useNavigate } from 'react-router-dom';
-import tw from 'twin.macro';
 
 const SlideStyle: CSSProperties = {
   width: '100%',
-  height: '208px',
+  height: '100%',
   objectFit: 'cover',
 };
 
@@ -48,8 +48,8 @@ const SimpleSlider = ({ data }: IProps) => {
   );
 };
 
-const Banner = tw.div`
-  cursor-pointer
+const Banner = styled.div`
+  cursor: pointer;
 `;
 
 export default SimpleSlider;

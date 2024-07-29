@@ -100,13 +100,13 @@ const ProfileList = styled.li`
   }
 
   &.selected {
-    color: ${({ theme }) => theme.colors.mainLogoColor};
-    border-right: 0.3rem solid ${({ theme }) => theme.colors.mainLogoColor};
+    color: ${({ theme }) => theme.colors.mainKey};
+    border-right: 0.3rem solid ${({ theme }) => theme.colors.mainKey};
     font-weight: bold;
     @media (max-width: 1000px) {
-      color: ${({ theme }) => theme.colors.mainLogoColor};
+      color: ${({ theme }) => theme.colors.mainKey};
 
-      border-bottom: 0.3rem solid ${({ theme }) => theme.colors.mainLogoColor};
+      border-bottom: 0.3rem solid ${({ theme }) => theme.colors.mainKey};
       border-right: 0;
     }
   }

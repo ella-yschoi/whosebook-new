@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
+import { colors, fonts } from '../../styles/theme';
 
 /**
  * input property
@@ -8,20 +9,15 @@ import { styled } from 'styled-components';
  * input styled
  *  color, backgroundColor, padding, width, border, borderRadius
  *
- * focusMode: click여부에 따라 input styling
+ * focusMode: click 여부에 따라 input styling
  */
+
 interface InputProps {
-  // input 태그의 value
   value?: string;
-  // input 태그의 type
   type?: string;
-  // input 태그의 고유 식별자, label의 htmlFor 속성 값과 연결
   id?: string;
-  // input 태그의 value
   name?: string;
-  // input 태그의 value
   placeholder?: string;
-  /** input tag의 styles */
   color?: string;
   backgroundColor?: string;
   padding?: string;
@@ -30,9 +26,7 @@ interface InputProps {
   borderRadius?: string;
   readOnly?: boolean;
   disabled?: boolean;
-  // 유효성 검증 로직에서 쓰일 변수
   focusMode?: string;
-  // input 태그의 onChange
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -80,23 +74,31 @@ const Input = (props: InputProps) => {
 };
 
 const StyledInput = styled.input<InputProps>`
+  font-family: ${fonts.subThin};
+  font-size: 0.9rem;
   width: ${({ width }) => (width ? width : '100%')};
   border: ${({ border }) => (border ? border : 'none')};
   border-radius: 0.3rem;
-  color: ${({ color, theme }) => (color ? color : `${theme.colors.mainLightBlack100}`)};
+  color: ${({ color }) => (color ? color : `${colors.mainBlack}`)};
   padding: ${({ padding }) => (padding ? padding : '0.7rem')};
-  background-color: ${({ backgroundColor, theme }) =>
-    backgroundColor ? backgroundColor : `${theme.colors.mainLightGray200}`};
+  background-color: ${({ backgroundColor }) => (backgroundColor ? backgroundColor : `${colors.mainWhite}`)};
+  border: 1px solid ${colors.mainGray300};
+  &::placeholder {
+    font-family: ${fonts.subThin};
+    font-size: 0.9rem;
+    color: ${colors.mainGray400};
+  }
+  &:hover {
+    background-color: ${colors.mainGray100};
+  }
   &:disabled {
     color: ${({ disabled }) => disabled && 'gray'};
     cursor: not-allowed;
   }
-
   &:focus {
-    border: ${({ focusMode }) => focusMode === 'true' && '1px solid #0077ff'};
-    box-shadow: ${({ focusMode }) =>
-      focusMode === 'true' && '0px 0px 5px 3px rgba(46, 139, 245, 0.3)'};
+    border: ${({ focusMode }) => focusMode === 'true' && `1px solid ${colors.mainKey}`};
     outline: ${({ focusMode }) => focusMode === 'true' && 'none'};
+    background-color: ${colors.mainWhite};
   }
 `;
 

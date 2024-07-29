@@ -22,7 +22,7 @@ export const loginAPI = async (data: IUserLoginData) => {
       localStorage.removeItem('Authorization');
       customAlert({
         title: '로그인을 해주세요.',
-        text: '로그인 유효기간이 만료되었습니다.',
+        text: '로그인 유효 기간이 만료되었어요',
         icon: 'error',
         confirmButtonText: '확인',
         confirmButtonColor: '#d33',
@@ -30,7 +30,7 @@ export const loginAPI = async (data: IUserLoginData) => {
     } else {
       customAlert({
         title: '로그인 실패',
-        text: '이메일이 존재하지 않거나, 비밀번호가 불일치합니다.',
+        text: '이메일이 존재하지 않거나, 비밀번호가 일치하지 않아요',
         icon: 'error',
         confirmButtonText: '확인',
         confirmButtonColor: '#d33',
@@ -54,12 +54,12 @@ export const registerAPI = async (data: FormData) => {
       const { message } = err.response.data;
       let title = '';
       let text = '';
-      if (message === '사용자가 이미 존재 합니다.') {
-        title = '이미 가입된 이메일이네요!';
-        text = '다른 이메일로 가입을 진행해주세요. :)';
+      if (message === '사용자가 이미 존재 해요') {
+        title = '이미 가입된 이메일이에요';
+        text = '다른 이메일로 가입해주세요 :)';
       } else {
-        title = '이미 사용중인 닉네임이네요!';
-        text = '다른 닉네임을 사용해주세요. :)';
+        title = '이미 사용중인 닉네임이에요';
+        text = '다른 닉네임을 사용해주세요 :)';
       }
       customAlert({
         title,
@@ -74,7 +74,7 @@ export const registerAPI = async (data: FormData) => {
     ) {
       customAlert({
         title: '서버 에러 발생',
-        text: '서버에러가 발생했습니다. 관리자가 확인중입니다.',
+        text: '서버 에러가 발생했어요. 개발자가 확인 중이에요!',
         icon: 'error',
         confirmButtonText: '확인',
         confirmButtonColor: '#C51605',
@@ -106,10 +106,10 @@ export const memberInfoAPI = async () => {
     if (typeGuard<{ response: { data: { status: number; message: string } } }>(err, 'response')) {
       const { status, message } = err.response.data;
       localStorage.removeItem('Authorization');
-      if (status === 404 && message === '이메일이 존재하지 않거나, 비밀번호가 불일치합니다.')
+      if (status === 404 && message === '이메일이 존재하지 않거나, 비밀번호가 일치하지 않아요')
         customAlert({
           title: '로그인 확인 필요',
-          text: '이메일이 존재하지 않거나, 비밀번호가 불일치합니다.',
+          text: '이메일이 존재하지 않거나, 비밀번호가 일치하지 않아요',
           icon: 'error',
           confirmButtonText: '확인',
           confirmButtonColor: '#d33',

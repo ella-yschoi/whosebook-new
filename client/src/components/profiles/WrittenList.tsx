@@ -4,10 +4,13 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import ProfileCuration from './ProfileCard';
-import ClockLoading from '../Loading/ClockLoading';
+import ClockLoading from '../loading/ClockLoading';
 import { UserPageType } from '../../types';
 import { CurationProps } from '../../types/card';
-import { getWrittenCuratoionsAPI, getUserWrittenCurationsAPI } from '../../api/profileApi';
+import {
+  getWrittenCuratoionsAPI,
+  getUserWrittenCurationsAPI,
+} from '../../api/profileApi';
 import { itemsPerSize } from '../../types';
 
 interface WrittenListProps {
@@ -26,9 +29,13 @@ const WrittenList = ({ type }: WrittenListProps) => {
 
   const { memberId } = useParams();
 
-  const [writtenCurations, setWrittenCurations] = useState<CurationProps[] | null>(null);
+  const [writtenCurations, setWrittenCurations] = useState<
+    CurationProps[] | null
+  >(null);
   const [totalWirttenCurations, setTotalWirttenCurations] = useState<number>(0);
-  const [writtenPage, setWrittenPage] = useState<number>((Number(pageParm) - 1) | 0);
+  const [writtenPage, setWrittenPage] = useState<number>(
+    (Number(pageParm) - 1) | 0
+  );
   const [totalWrittenPage, setTotalWrittenPage] = useState<number>(0);
 
   const navigate = useNavigate();
@@ -38,7 +45,11 @@ const WrittenList = ({ type }: WrittenListProps) => {
       const response =
         type === UserPageType.MYPAGE
           ? await getWrittenCuratoionsAPI(writtenPage + 1, itemsPerSize)
-          : await getUserWrittenCurationsAPI(Number(memberId), writtenPage + 1, itemsPerSize);
+          : await getUserWrittenCurationsAPI(
+              Number(memberId),
+              writtenPage + 1,
+              itemsPerSize
+            );
 
       if (response) {
         setWrittenCurations(response.data.data);
@@ -51,14 +62,20 @@ const WrittenList = ({ type }: WrittenListProps) => {
     }
   };
 
-  const handleWrittenPageChange = async (selectedItem: { selected: number }) => {
+  const handleWrittenPageChange = async (selectedItem: {
+    selected: number;
+  }) => {
     const selectedPage = selectedItem.selected;
     setWrittenPage(selectedPage);
 
     if (type === UserPageType.MYPAGE) {
       navigate(`/mypage/written?page=${selectedPage + 1}&size=${itemsPerSize}`);
     } else {
-      navigate(`/userpage/${memberId}/written?page=${selectedPage + 1}&size=${itemsPerSize}`);
+      navigate(
+        `/userpage/${memberId}/written?page=${
+          selectedPage + 1
+        }&size=${itemsPerSize}`
+      );
     }
   };
 
@@ -72,7 +89,7 @@ const WrittenList = ({ type }: WrittenListProps) => {
   return (
     <>
       {isLoading && !writtenCurations?.length ? (
-        <ClockLoading color="#3173f6" style={{ ...loadingStyle }} />
+        <ClockLoading color='#3173f6' style={{ ...loadingStyle }} />
       ) : writtenCurations?.length ? (
         <>
           {totalWirttenCurations} 개의 큐레이션

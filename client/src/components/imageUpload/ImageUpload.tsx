@@ -4,7 +4,7 @@ import tw from 'twin.macro';
 
 import { changeImageFileName, createImageDataUrl } from '../../utils/image';
 import { ImgLabel } from '../label/Label';
-import ProfileImg from '../../img/profile_img2.png';
+import ProfileImg from '../../img/defaultProfile.png';
 import Button from '../buttons/Button';
 
 /**
@@ -75,7 +75,7 @@ const ImgWrap = styled.div`
   width: 8.75rem;
   height: 8.75rem;
   border-radius: 0.5rem;
-  background-color: ${({ theme }) => theme.colors.mainLightGray300};
+  background-color: ${({ theme }) => theme.colors.mainBlue100};
   display: flex;
   justify-content: center;
   align-items: center;

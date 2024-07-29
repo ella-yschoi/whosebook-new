@@ -1,9 +1,11 @@
 import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
-import tw from 'twin.macro';
+import { useDispatch } from 'react-redux';
+
+import styled from 'styled-components';
+import { colors } from '../../styles/theme';
 
 import { logout } from '../../store/userSlice';
-import { useDispatch } from 'react-redux';
 
 interface IProps {
   handleIsDropMenuOpen: () => void;
@@ -25,60 +27,50 @@ const DropdownMenu = ({ handleIsDropMenuOpen, handleSelectMenu }: IProps) => {
   };
 
   return (
-    <Container className="dropdown" onClick={handleDropMenuClose}>
-      <MenuWrapper>
-        <MenuList>
-          <Menu>
-            <Link to="/write">큐레이션 작성하기</Link>
-          </Menu>
-          <Menu>
-            <Link to="/mypage">마이페이지</Link>
-          </Menu>
-          <Menu>
-            <Link to="/" onClick={handleLogout}>
-              로그아웃
-            </Link>
-          </Menu>
-        </MenuList>
-      </MenuWrapper>
-    </Container>
+    <MenuWrapper className='dropdown' onClick={handleDropMenuClose}>
+      <MenuList>
+        <Menu>
+          <Link to='/write'>큐레이션 쓰기</Link>
+        </Menu>
+        <Menu>
+          <Link to='/mypage'>마이 페이지</Link>
+        </Menu>
+        <Menu>
+          <Link to='/' onClick={handleLogout}>
+            로그아웃
+          </Link>
+        </Menu>
+      </MenuList>
+    </MenuWrapper>
   );
 };
 
-const Container = tw.div`
-  fixed
-  top-0
-  right-0
-  w-full
-  h-full
-  bg-transparent
-
+const MenuWrapper = styled.div`
+  position: absolute;
+  top: 150%;
+  right: 0;
+  width: 11rem;
+  height: 11rem;
+  z-index: 30;
+  padding: 1.9rem 2rem 1rem 2rem;
+  background-color: ${colors.mainBlue100};
+  border-radius: 0.5rem;
+  box-shadow: 0 25px 50px -12px ${colors.mainGray400},
+    0 10px 15px -3px ${colors.mainGray400};
 `;
 
-const MenuWrapper = tw.div`
-  bg-white
-  absolute
-  z-30
-  top-20
-  right-8
-  px-8
-  pt-10
-  pb-5
-  rounded-lg
-  shadow-2xl
-  shadow-gray-300
-  text-[1.05rem]
+const MenuList = styled.ul`
+  display: flex;
+  flex-direction: column;
 `;
 
-const MenuList = tw.ul`
-  flex
-  flex-col
-`;
-
-const Menu = tw.li`
-  pb-5
-  cursor-pointer
-  hover:text-blue-500
+const Menu = styled.li`
+  padding-bottom: 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  &:hover {
+    color: ${colors.mainKey};
+  }
 `;
 
 export default DropdownMenu;

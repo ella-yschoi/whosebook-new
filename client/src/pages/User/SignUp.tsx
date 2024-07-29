@@ -14,7 +14,7 @@ import Input from '../../components/input/Input';
 import Button from '../../components/buttons/Button';
 import ImageUpload from '../../components/imageUpload/ImageUpload';
 import Modal from '../../components/modals/Modal';
-import ClockLoading from '../../components/Loading/ClockLoading';
+import ClockLoading from '../../components/loading/ClockLoading';
 
 interface FormValue {
   email: string;
@@ -198,20 +198,22 @@ const SignUp = () => {
 
   return (
     <>
-      {isModalOpen && <Modal type={ModalType.WELCOME} handleCloseModal={handleCloseModal} />}
+      {isModalOpen && (
+        <Modal type={ModalType.WELCOME} handleCloseModal={handleCloseModal} />
+      )}
       {!isLoading ? (
         <Container>
           <Title>후즈북의 큐레이터가 되어주실래요?</Title>
           <Form onSubmit={handleRegister}>
             <ItemWrap>
-              <Label type="title" htmlFor="email" content="이메일" />
+              <Label type='title' htmlFor='email' content='이메일' />
               <Input
-                id="email"
-                name="email"
-                type="email"
+                id='email'
+                name='email'
+                type='email'
                 value={formValue.email}
                 disabled={isRedirect ? true : false}
-                placeholder="이메일을 입력해주세요."
+                placeholder='이메일을 입력해주세요.'
                 onChange={handleUpdateFormValue}
               />
               {!isRedirect && formValue.email && !formValid.email && (
@@ -220,12 +222,12 @@ const SignUp = () => {
             </ItemWrap>
             {!isRedirect && (
               <ItemWrap>
-                <Label type="title" htmlFor="password" content="비밀번호" />
+                <Label type='title' htmlFor='password' content='비밀번호' />
                 <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder="비밀번호를 입력해주세요."
+                  id='password'
+                  name='password'
+                  type='password'
+                  placeholder='비밀번호를 입력해주세요.'
                   onChange={handleUpdateFormValue}
                 />
                 {formValue.password && !formValid.password && (
@@ -238,12 +240,16 @@ const SignUp = () => {
             )}
             {!isRedirect && (
               <ItemWrap>
-                <Label type="title" htmlFor="passwordConfirm" content="비밀번호 확인" />
+                <Label
+                  type='title'
+                  htmlFor='passwordConfirm'
+                  content='비밀번호 확인'
+                />
                 <Input
-                  id="passwordConfirm"
-                  name="passwordConfirm"
-                  type="password"
-                  placeholder="비밀번호 확인을 위해 한번 더 입력해주세요."
+                  id='passwordConfirm'
+                  name='passwordConfirm'
+                  type='password'
+                  placeholder='비밀번호 확인을 위해 한번 더 입력해주세요.'
                   onChange={handleUpdateFormValue}
                 />
                 {formValue.passwordConfirm && !formValid.passwordConfirm && (
@@ -252,21 +258,24 @@ const SignUp = () => {
               </ItemWrap>
             )}
             <ItemWrap>
-              <Label type="title" htmlFor="nickname" content="닉네임" />
+              <Label type='title' htmlFor='nickname' content='닉네임' />
               <Input
-                id="nickname"
-                name="nickname"
+                id='nickname'
+                name='nickname'
                 value={formValue.nickname}
-                type="text"
-                placeholder="사용하실 닉네임을 입력해주세요."
+                type='text'
+                placeholder='사용하실 닉네임을 입력해주세요.'
                 onChange={handleUpdateFormValue}
               />
               {formValue.nickname && !formValid.nickname && (
-                <Valid>영문, 한글, 숫자만 입력, 2글자 이상 15글자 미만으로 입력가능합니다. </Valid>
+                <Valid>
+                  영문, 한글, 숫자만 입력, 2글자 이상 15글자 미만으로
+                  입력가능합니다.{' '}
+                </Valid>
               )}
             </ItemWrap>
             <ItemWrap>
-              <Label type="title" content="프로필 이미지" />
+              <Label type='title' content='프로필 이미지' />
               <ImageUpload
                 nickname={formValue.nickname}
                 selectImg={selectImg}
@@ -283,7 +292,7 @@ const SignUp = () => {
                   ? 'primary'
                   : 'disabled'
               }
-              content="회원가입"
+              content='회원가입'
               disabled={
                 !(
                   formValid.email &&
@@ -296,7 +305,7 @@ const SignUp = () => {
           </Form>
         </Container>
       ) : (
-        <ClockLoading loading={isLoading} color="red" />
+        <ClockLoading loading={isLoading} color='red' />
       )}
     </>
   );

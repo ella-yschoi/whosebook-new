@@ -67,7 +67,7 @@ const ProfileOutContainer = styled.div`
 const Point = styled.div`
   font-size: 1.3rem;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors.mainLogoColor};
+  color: ${({ theme }) => theme.colors.mainKey};
   padding-right: 1rem;
 `;
 const Info = styled.div`

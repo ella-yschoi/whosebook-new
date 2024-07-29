@@ -1,30 +1,31 @@
 import { createGlobalStyle } from 'styled-components';
+import { colors, fonts } from '../styles/theme';
 
-const GlobalStyles = createGlobalStyle` 
+const GlobalStyles = createGlobalStyle`
   @font-face {
-    font-family: 'SpoqaHanSansNeo-Light';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Light.woff') format('woff');
-    font-weight: normal;
+    font-family: 'Pretendard-Thin';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Thin.woff') format('woff');
+    font-weight: 100;
     font-style: normal;
   }
 
   @font-face {
-    font-family: 'SpoqaHanSansNeo-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
-    font-weight: normal;
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 300;
     font-style: normal;
   }
 
   @font-face {
-    font-family: 'SpoqaHanSansNeo-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Bold.woff') format('woff');
-    font-weight: normal;
+    font-family: 'Pretendard-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+    font-weight: 900;
     font-style: normal;
   }
 
   @font-face {
-    font-family: 'EF_jejudoldam';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2') format('woff2');
+    font-family: 'HSSanTokki20-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/HSSanTokki20-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
   }
@@ -34,8 +35,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background-color: ${({ theme }) => theme.colors.mainLightGray200};
-    font-family: 'SpoqaHanSansNeo-Regular', 'SpoqaHanSansNeo-Bold', sans-serif;
+    background-color: ${colors.mainWhite};
+    font-family: ${fonts.mainRegular, fonts.subBold, fonts.subRegular, fonts.subThin}, sans-serif;
     padding-top: 6rem !important;
   }
 
@@ -68,12 +69,12 @@ const GlobalStyles = createGlobalStyle`
     cursor: pointer;
   }
 
-  ol, ul{
+  ol, ul {
     list-style: none;
   }
 
   .ql-editor strong {
-    font-weight: bold !important;
+    font-weight: ${fonts.subBold} !important;
   }
 
   .ql-editor em {
@@ -81,28 +82,29 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .title {
-    font-family: 'EF_jejudoldam';
+    font-family: ${fonts.mainRegular};
     font-size: 2.5rem;
   }
 
   nav {
     li[data-type='/curation/best?page='], li[data-type='/curation/new?page='], .login-btn, .register-btn {
-      font-family: 'SpoqaHanSansNeo-Bold';
-      font-size: 1.05rem;
+      font-size: 1.1rem;
+      font-family: ${fonts.subThin};
     }
 
     .register-btn {
-      padding-left: 1.2rem;
+      margin-left: 1.5rem;
     }
   }
 
   .nav-title, .footer-title {
-    font-family: 'EF_jejudoldam';
-    font-size: 1.7rem;
+    font-family: ${fonts.mainRegular};
+    font-size: 2rem;
+    color: ${colors.mainKey};
   }
 
   .dropdown {
-    font-family: 'SpoqaHanSansNeo-Bold';
+    font-family: ${fonts.subThin};
     font-size: 0.9rem;
   }
 
@@ -111,11 +113,11 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .content-container, .reply-container {
-    font-family: 'SpoqaHanSansNeo-Light';
+    font-family: ${fonts.subThin};
   }
 
   .created-date {
-    font-family: 'SpoqaHanSansNeo-Light';
+    font-family: ${fonts.subThin};
     font-size: 0.9rem;
   }
 `;
